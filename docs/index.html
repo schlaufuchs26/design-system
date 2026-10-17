@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schlaufuchs design system</title>
+  <link rel="stylesheet" href="./design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* Docs page layout; everything visual comes from the design system. */
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    .top {
+      display: flex; align-items: center; gap: var(--fox-space-3);
+      padding: var(--fox-space-8) 0 var(--fox-space-6);
+      border-bottom: 1px solid var(--fox-color-border-subtle);
+      margin-bottom: var(--fox-space-8);
+    }
+    .mark {
+      width: 44px; height: 44px; display: grid; place-items: center;
+      border-radius: var(--fox-radius-lg);
+      background: var(--fox-color-accent-subtle);
+      border: 1px solid var(--fox-color-accent-default);
+      font-size: 22px;
+    }
+    .top h1 { font-size: var(--fox-text-xl); }
+    .top p { color: var(--fox-color-text-muted); font-size: var(--fox-text-sm); }
+    section { margin-bottom: var(--fox-space-12); }
+    section > h2 {
+      font-size: var(--fox-text-lg); margin-bottom: var(--fox-space-1);
+    }
+    section > .lead { color: var(--fox-color-text-muted); font-size: var(--fox-text-sm); margin-bottom: var(--fox-space-4); }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: var(--fox-space-3); }
+    .swatch {
+      border: 1px solid var(--fox-color-border-subtle);
+      border-radius: var(--fox-radius-md); overflow: hidden;
+      background: var(--fox-color-bg-panel);
+    }
+    .swatch .chip { height: 56px; border-bottom: 1px solid var(--fox-color-border-subtle); }
+    .swatch .meta { padding: var(--fox-space-2); font-size: var(--fox-text-xs); }
+    .swatch .name { font-family: var(--fox-font-mono); color: var(--fox-color-text-secondary); }
+    .swatch .value { color: var(--fox-color-text-muted); }
+    .bars { display: grid; gap: var(--fox-space-2); }
+    .bar { display: flex; align-items: center; gap: var(--fox-space-3); }
+    .bar .block { height: 14px; background: var(--fox-color-accent-subtle); border-left: 2px solid var(--fox-color-accent-default); border-radius: var(--fox-radius-sm); }
+    .bar code { color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); }
+    .type-row { display: flex; align-items: baseline; gap: var(--fox-space-4); padding: var(--fox-space-2) 0; border-bottom: 1px solid var(--fox-color-border-subtle); }
+    .type-row code { width: 120px; color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); }
+    .radius-row { display: flex; gap: var(--fox-space-4); flex-wrap: wrap; }
+    .radius-box {
+      width: 84px; height: 56px; display: grid; place-items: center;
+      background: var(--fox-color-bg-surface); border: 1px solid var(--fox-color-border-default);
+      font-size: var(--fox-text-xs); color: var(--fox-color-text-muted);
+    }
+    .demo { display: flex; flex-wrap: wrap; gap: var(--fox-space-3); align-items: center; }
+    .demo-grid { display: grid; gap: var(--fox-space-4); grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    pre.snippet {
+      margin-top: var(--fox-space-3);
+      font-size: var(--fox-text-xs);
+      color: var(--fox-color-text-muted);
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="mark">🦊</div>
+      <div style="flex:1">
+        <h1>Schlaufuchs design system</h1>
+        <p>DTCG tokens compiled to CSS custom properties; components as plain classes and data attributes.</p>
+      </div>
+      <div class="fox-row">
+        <button type="button" class="fox-button" data-variant="outline" data-size="sm" id="theme-toggle">Light theme</button>
+        <button type="button" class="fox-button" data-variant="outline" data-size="sm" id="density-toggle">Compact</button>
+      </div>
+    </header>
+
+    <section>
+      <h2>Colour</h2>
+      <p class="lead">Surfaces, text, the amber accent and one status palette. Every swatch reads the token, never a literal.</p>
+      <h3 class="fox-eyebrow" style="margin-bottom: var(--fox-space-2)">Surfaces</h3>
+      <div class="swatches">
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-bg-deep)"></div><div class="meta"><div class="name">bg-deep</div><div class="value">page</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-bg-panel)"></div><div class="meta"><div class="name">bg-panel</div><div class="value">panel</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-bg-surface)"></div><div class="meta"><div class="name">bg-surface</div><div class="value">card</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-bg-elevated)"></div><div class="meta"><div class="name">bg-elevated</div><div class="value">dialog</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-bg-inset)"></div><div class="meta"><div class="name">bg-inset</div><div class="value">input</div></div></div>
+      </div>
+      <h3 class="fox-eyebrow" style="margin: var(--fox-space-5) 0 var(--fox-space-2)">Text and accent</h3>
+      <div class="swatches">
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-text-primary)"></div><div class="meta"><div class="name">text-primary</div><div class="value">headings</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-text-secondary)"></div><div class="meta"><div class="name">text-secondary</div><div class="value">body</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-text-muted)"></div><div class="meta"><div class="name">text-muted</div><div class="value">labels</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-accent-default)"></div><div class="meta"><div class="name">accent-default</div><div class="value">fill</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-accent-text)"></div><div class="meta"><div class="name">accent-text</div><div class="value">links</div></div></div>
+      </div>
+      <h3 class="fox-eyebrow" style="margin: var(--fox-space-5) 0 var(--fox-space-2)">Status</h3>
+      <div class="swatches">
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-status-neutral)"></div><div class="meta"><div class="name">neutral</div><div class="value">idle</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-status-info)"></div><div class="meta"><div class="name">info</div><div class="value">active</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-status-queued)"></div><div class="meta"><div class="name">queued</div><div class="value">ready</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-status-success)"></div><div class="meta"><div class="name">success</div><div class="value">done</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-status-warning)"></div><div class="meta"><div class="name">warning</div><div class="value">review</div></div></div>
+        <div class="swatch"><div class="chip" style="background: var(--fox-color-status-danger)"></div><div class="meta"><div class="name">danger</div><div class="value">failed</div></div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Space and shape</h2>
+      <p class="lead">A four-based scale, five radii. The bars are drawn at the token width.</p>
+      <div class="bars">
+        <div class="bar"><code>space-1 · 4px</code><div class="block" style="width: var(--fox-space-1)"></div></div>
+        <div class="bar"><code>space-2 · 8px</code><div class="block" style="width: var(--fox-space-2)"></div></div>
+        <div class="bar"><code>space-3 · 12px</code><div class="block" style="width: var(--fox-space-3)"></div></div>
+        <div class="bar"><code>space-4 · 16px</code><div class="block" style="width: var(--fox-space-4)"></div></div>
+        <div class="bar"><code>space-6 · 24px</code><div class="block" style="width: var(--fox-space-6)"></div></div>
+        <div class="bar"><code>space-8 · 32px</code><div class="block" style="width: var(--fox-space-8)"></div></div>
+        <div class="bar"><code>space-12 · 48px</code><div class="block" style="width: var(--fox-space-12)"></div></div>
+      </div>
+      <div class="radius-row" style="margin-top: var(--fox-space-5)">
+        <div class="radius-box" style="border-radius: var(--fox-radius-sm)">sm</div>
+        <div class="radius-box" style="border-radius: var(--fox-radius-md)">md</div>
+        <div class="radius-box" style="border-radius: var(--fox-radius-lg)">lg</div>
+        <div class="radius-box" style="border-radius: var(--fox-radius-xl)">xl</div>
+        <div class="radius-box" style="border-radius: var(--fox-radius-pill)">pill</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Type</h2>
+      <p class="lead">Inter for prose, JetBrains Mono for data. Six sizes, three line heights.</p>
+      <div class="type-row"><code>text-2xl</code><span style="font-size: var(--fox-text-2xl); color: var(--fox-color-text-primary); font-weight: 600">The quick fox</span></div>
+      <div class="type-row"><code>text-xl</code><span style="font-size: var(--fox-text-xl); color: var(--fox-color-text-primary); font-weight: 600">The quick fox</span></div>
+      <div class="type-row"><code>text-lg</code><span style="font-size: var(--fox-text-lg); color: var(--fox-color-text-primary)">The quick fox</span></div>
+      <div class="type-row"><code>text-base</code><span style="font-size: var(--fox-text-base)">The quick brown fox jumps over the lazy dog.</span></div>
+      <div class="type-row"><code>text-sm</code><span style="font-size: var(--fox-text-sm)">The quick brown fox jumps over the lazy dog.</span></div>
+      <div class="type-row"><code>text-xs</code><span style="font-size: var(--fox-text-xs)">The quick brown fox jumps over the lazy dog.</span></div>
+      <div class="type-row"><code>mono</code><span class="fox-mono">0.993 m/s · 2026-10-17 21:34</span></div>
+    </section>
+
+    <section>
+      <h2>Components</h2>
+      <p class="lead">Same markup in React, Vue and static HTML: a class plus data attributes.</p>
+
+      <h3 class="fox-eyebrow" style="margin-bottom: var(--fox-space-2)">Button</h3>
+      <div class="demo">
+        <button type="button" class="fox-button" data-variant="solid">Solid</button>
+        <button type="button" class="fox-button" data-variant="outline">Outline</button>
+        <button type="button" class="fox-button" data-variant="ghost">Ghost</button>
+        <button type="button" class="fox-button" data-variant="danger">Danger</button>
+        <button type="button" class="fox-button" data-variant="outline" data-size="sm">Small</button>
+        <button type="button" class="fox-button" data-variant="outline" data-size="lg">Large</button>
+        <button type="button" class="fox-button" data-variant="outline" data-size="icon" aria-label="Pin">📌</button>
+        <button type="button" class="fox-button" data-variant="solid" disabled>Disabled</button>
+      </div>
+      <pre class="snippet">&lt;button class="fox-button" data-variant="solid" data-size="md"&gt;Solid&lt;/button&gt;</pre>
+
+      <h3 class="fox-eyebrow" style="margin: var(--fox-space-6) 0 var(--fox-space-2)">Badge and dot</h3>
+      <div class="demo">
+        <span class="fox-badge">neutral</span>
+        <span class="fox-badge" data-tone="accent">accent</span>
+        <span class="fox-badge" data-tone="info">info</span>
+        <span class="fox-badge" data-tone="queued">queued</span>
+        <span class="fox-badge" data-tone="success">success</span>
+        <span class="fox-badge" data-tone="warning">warning</span>
+        <span class="fox-badge" data-tone="danger">danger</span>
+        <span class="fox-badge" data-tone="success" data-outline data-mono>+3.1 %</span>
+        <span class="fox-row" style="gap: var(--fox-space-1)"><span class="fox-dot" data-tone="success"></span><span class="fox-hint">healthy</span></span>
+        <span class="fox-row" style="gap: var(--fox-space-1)"><span class="fox-dot" data-tone="warning"></span><span class="fox-hint">waiting</span></span>
+        <span class="fox-row" style="gap: var(--fox-space-1)"><span class="fox-dot" data-tone="danger"></span><span class="fox-hint">failed</span></span>
+      </div>
+      <pre class="snippet">&lt;span class="fox-badge" data-tone="warning"&gt;review&lt;/span&gt;</pre>
+
+      <h3 class="fox-eyebrow" style="margin: var(--fox-space-6) 0 var(--fox-space-2)">Card</h3>
+      <div class="demo-grid">
+        <div class="fox-card">
+          <div class="fox-card-header"><span class="fox-dot" data-tone="success"></span><span class="fox-card-title">Flat card</span><span class="fox-spacer"></span><span class="fox-badge" data-tone="accent">live</span></div>
+          <div class="fox-card-body">Surface, hairline border, no shadow. The default.</div>
+          <div class="fox-card-footer"><button type="button" class="fox-button" data-variant="ghost" data-size="sm">Open</button><span class="fox-spacer"></span><span class="fox-mono">12 ms</span></div>
+        </div>
+        <div class="fox-card" data-elevated>
+          <div class="fox-card-header"><span class="fox-card-title">Elevated card</span></div>
+          <div class="fox-card-body">For dialogs and menus, where the surface must leave the page.</div>
+        </div>
+        <div class="fox-card" data-accent>
+          <div class="fox-card-header"><span class="fox-card-title">Accent card</span></div>
+          <div class="fox-card-body">Amber border, for the one thing that needs attention.</div>
+        </div>
+      </div>
+
+      <h3 class="fox-eyebrow" style="margin: var(--fox-space-6) 0 var(--fox-space-2)">Input</h3>
+      <div class="demo-grid">
+        <div class="fox-field">
+          <label class="fox-label" for="demo-name">Ticket title</label>
+          <input class="fox-input" id="demo-name" placeholder="What is wrong today?" />
+          <span class="fox-hint">Shows the amber focus ring.</span>
+        </div>
+        <div class="fox-field">
+          <label class="fox-label" data-tone="danger" for="demo-bad">Slug</label>
+          <input class="fox-input" id="demo-bad" value="Not A Slug" aria-invalid="true" />
+          <span class="fox-hint" data-tone="danger">Invalid state uses the danger token.</span>
+        </div>
+        <div class="fox-field">
+          <label class="fox-label" for="demo-select">Profile</label>
+          <select class="fox-select" id="demo-select"><option>kanban</option><option>coordinator</option></select>
+        </div>
+      </div>
+
+      <h3 class="fox-eyebrow" style="margin: var(--fox-space-6) 0 var(--fox-space-2)">Table</h3>
+      <div class="fox-card" data-padding="none">
+        <table class="fox-table" data-zebra>
+          <thead><tr><th>Session</th><th>Profile</th><th class="fox-num">Turns</th><th class="fox-num">Cost</th></tr></thead>
+          <tbody>
+            <tr><td class="fox-mono">discord:dm-toggly</td><td><span class="fox-badge" data-tone="info">chat</span></td><td class="fox-num">14</td><td class="fox-num">$0.08</td></tr>
+            <tr><td class="fox-mono">kanban:2696</td><td><span class="fox-badge" data-tone="queued">worker</span></td><td class="fox-num">37</td><td class="fox-num">$0.41</td></tr>
+            <tr><td class="fox-mono">cron:morning-brief</td><td><span class="fox-badge" data-tone="success">cron</span></td><td class="fox-num">6</td><td class="fox-num">$0.03</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="fox-eyebrow" style="margin: var(--fox-space-6) 0 var(--fox-space-2)">Dialog</h3>
+      <div class="demo">
+        <button type="button" class="fox-button" data-variant="solid" id="open-dialog">Open dialog</button>
+        <dialog class="fox-dialog" id="demo-dialog">
+          <div class="fox-dialog-header"><span class="fox-dialog-title">Move card</span></div>
+          <div class="fox-dialog-body">Native <code>&lt;dialog&gt;</code>: Escape, focus trap and the backdrop come from the browser; the CSS only dresses it.</div>
+          <div class="fox-dialog-footer">
+            <button type="button" class="fox-button" data-variant="ghost" id="close-dialog">Cancel</button>
+            <button type="button" class="fox-button" data-variant="solid">Move</button>
+          </div>
+        </dialog>
+      </div>
+      <p class="fox-hint" style="margin: var(--fox-space-3) 0 var(--fox-space-2)">Preview (the same markup, laid out in the page):</p>
+      <div class="fox-dialog" style="position: static; max-height: none">
+        <div class="fox-dialog-header"><span class="fox-dialog-title">Move card</span><span class="fox-spacer"></span><span class="fox-badge" data-tone="queued">#2696</span></div>
+        <div class="fox-dialog-body">Ready → In Progress. The dialog is a native element; the backdrop and the Escape key come from the browser.</div>
+        <div class="fox-dialog-footer">
+          <button type="button" class="fox-button" data-variant="ghost">Cancel</button>
+          <button type="button" class="fox-button" data-variant="solid">Move</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    document.getElementById("theme-toggle").addEventListener("click", (event) => {
+      const light = root.dataset.theme === "light";
+      root.dataset.theme = light ? "dark" : "light";
+      event.currentTarget.textContent = light ? "Light theme" : "Dark theme";
+    });
+    document.getElementById("density-toggle").addEventListener("click", (event) => {
+      const compact = root.dataset.density === "compact";
+      if (compact) delete root.dataset.density;
+      else root.dataset.density = "compact";
+      event.currentTarget.textContent = compact ? "Compact" : "Comfortable";
+    });
+    const dialog = document.getElementById("demo-dialog");
+    document.getElementById("open-dialog").addEventListener("click", () => dialog.showModal());
+    document.getElementById("close-dialog").addEventListener("click", () => dialog.close());
+  </script>
+</body>
+</html>

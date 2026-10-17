@@ -1,0 +1,380 @@
+{
+  "$description": "Schlaufuchs design tokens, DTCG 2025.10 format. The single source: scripts/build.ts compiles it to CSS custom properties, a typed TS module and a Tailwind v4 @theme layer. Groups named color-light and density-compact are selector overrides for the same variable names.",
+  "color": {
+    "$type": "color",
+    "$description": "Warm near-black surfaces with an amber accent. Dark is the default; color-light overrides the same names.",
+    "bg": {
+      "deep": {
+        "$value": "#0a0908",
+        "$description": "The page behind everything."
+      },
+      "panel": {
+        "$value": "#14110f"
+      },
+      "surface": {
+        "$value": "#1e1a17"
+      },
+      "elevated": {
+        "$value": "#2a2420"
+      },
+      "inset": {
+        "$value": "#100e0d"
+      }
+    },
+    "border": {
+      "subtle": {
+        "$value": "#ffffff0d"
+      },
+      "default": {
+        "$value": "#ffffff17"
+      },
+      "strong": {
+        "$value": "#ffffff2e"
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "#f8f3ea"
+      },
+      "secondary": {
+        "$value": "#d9d0c4"
+      },
+      "muted": {
+        "$value": "#a2988b"
+      },
+      "subtle": {
+        "$value": "#6f665c"
+      }
+    },
+    "accent": {
+      "default": {
+        "$value": "#f2b134",
+        "$description": "The fox's amber; fills, borders and the focus ring."
+      },
+      "bright": {
+        "$value": "#ffc94d"
+      },
+      "hover": {
+        "$value": "#ffd76e"
+      },
+      "ink": {
+        "$value": "#1c1405",
+        "$description": "Text on an accent fill."
+      },
+      "text": {
+        "$value": "#ffc94d",
+        "$description": "Accent as text on a surface."
+      },
+      "subtle": {
+        "$value": "#f2b13424"
+      }
+    },
+    "status": {
+      "neutral": {
+        "$value": "#8f887d"
+      },
+      "info": {
+        "$value": "#6f9fb8"
+      },
+      "queued": {
+        "$value": "#a08cbf"
+      },
+      "success": {
+        "$value": "#6bb07a"
+      },
+      "warning": {
+        "$value": "#e07b39"
+      },
+      "danger": {
+        "$value": "#e0605a"
+      },
+      "neutral-bg": {
+        "$value": "#8f887d24"
+      },
+      "info-bg": {
+        "$value": "#6f9fb824"
+      },
+      "queued-bg": {
+        "$value": "#a08cbf24"
+      },
+      "success-bg": {
+        "$value": "#6bb07a24"
+      },
+      "warning-bg": {
+        "$value": "#e07b3924"
+      },
+      "danger-bg": {
+        "$value": "#e0605a24"
+      }
+    }
+  },
+  "color-light": {
+    "$type": "color",
+    "$description": "Warm paper light theme; same variable names, emitted under [data-theme=\"light\"].",
+    "bg": {
+      "deep": {
+        "$value": "#f4eee3"
+      },
+      "panel": {
+        "$value": "#fbf6ec"
+      },
+      "surface": {
+        "$value": "#fffdf7"
+      },
+      "elevated": {
+        "$value": "#ffffff"
+      },
+      "inset": {
+        "$value": "#ece4d7"
+      }
+    },
+    "border": {
+      "subtle": {
+        "$value": "#1d18130a"
+      },
+      "default": {
+        "$value": "#1d18131f"
+      },
+      "strong": {
+        "$value": "#1d18133d"
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "#1d1813"
+      },
+      "secondary": {
+        "$value": "#453c33"
+      },
+      "muted": {
+        "$value": "#6b6055"
+      },
+      "subtle": {
+        "$value": "#8b8073"
+      }
+    },
+    "accent": {
+      "default": {
+        "$value": "#f2b134"
+      },
+      "bright": {
+        "$value": "#ffc94d"
+      },
+      "hover": {
+        "$value": "#ffd76e"
+      },
+      "ink": {
+        "$value": "#1c1405"
+      },
+      "text": {
+        "$value": "#8a5a00"
+      },
+      "subtle": {
+        "$value": "#b8791a1f"
+      }
+    },
+    "status": {
+      "neutral": {
+        "$value": "#6b6055"
+      },
+      "info": {
+        "$value": "#2f6f96"
+      },
+      "queued": {
+        "$value": "#6b4a8c"
+      },
+      "success": {
+        "$value": "#2c7a3d"
+      },
+      "warning": {
+        "$value": "#9a6410"
+      },
+      "danger": {
+        "$value": "#b0342f"
+      },
+      "neutral-bg": {
+        "$value": "#6b60551f"
+      },
+      "info-bg": {
+        "$value": "#2f6f961f"
+      },
+      "queued-bg": {
+        "$value": "#6b4a8c1f"
+      },
+      "success-bg": {
+        "$value": "#2c7a3d1f"
+      },
+      "warning-bg": {
+        "$value": "#9a64101f"
+      },
+      "danger-bg": {
+        "$value": "#b0342f1f"
+      }
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "$description": "Four-based scale; reach for the nearest step instead of an ad-hoc px value.",
+    "1": {
+      "$value": "4px"
+    },
+    "2": {
+      "$value": "8px"
+    },
+    "3": {
+      "$value": "12px"
+    },
+    "4": {
+      "$value": "16px"
+    },
+    "5": {
+      "$value": "20px"
+    },
+    "6": {
+      "$value": "24px"
+    },
+    "8": {
+      "$value": "32px"
+    },
+    "10": {
+      "$value": "40px"
+    },
+    "12": {
+      "$value": "48px"
+    },
+    "16": {
+      "$value": "64px"
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "sm": {
+      "$value": "4px"
+    },
+    "md": {
+      "$value": "6px"
+    },
+    "lg": {
+      "$value": "10px"
+    },
+    "xl": {
+      "$value": "14px"
+    },
+    "pill": {
+      "$value": "999px"
+    }
+  },
+  "font": {
+    "$type": "fontFamily",
+    "sans": {
+      "$value": ["Inter", "system-ui", "-apple-system", "sans-serif"]
+    },
+    "mono": {
+      "$value": [
+        "JetBrains Mono",
+        "ui-monospace",
+        "SFMono-Regular",
+        "monospace"
+      ]
+    }
+  },
+  "text": {
+    "$type": "dimension",
+    "xs": {
+      "$value": "11px"
+    },
+    "sm": {
+      "$value": "13px"
+    },
+    "base": {
+      "$value": "15px"
+    },
+    "lg": {
+      "$value": "18px"
+    },
+    "xl": {
+      "$value": "24px"
+    },
+    "2xl": {
+      "$value": "32px"
+    }
+  },
+  "leading": {
+    "$type": "number",
+    "tight": {
+      "$value": 1.2
+    },
+    "normal": {
+      "$value": 1.55
+    },
+    "loose": {
+      "$value": 1.7
+    }
+  },
+  "weight": {
+    "$type": "fontWeight",
+    "regular": {
+      "$value": 400
+    },
+    "medium": {
+      "$value": 500
+    },
+    "semibold": {
+      "$value": 600
+    },
+    "bold": {
+      "$value": 700
+    }
+  },
+  "shadow": {
+    "$type": "string",
+    "$description": "Warm black, low alpha: the fox's surfaces sit flat, shadows only lift dialogs and menus.",
+    "sm": {
+      "$value": "0 1px 2px #00000059"
+    },
+    "md": {
+      "$value": "0 4px 12px #00000073"
+    },
+    "lg": {
+      "$value": "0 18px 48px #000000a6"
+    }
+  },
+  "motion": {
+    "$type": "duration",
+    "fast": {
+      "$value": "120ms"
+    },
+    "base": {
+      "$value": "180ms"
+    }
+  },
+  "ease": {
+    "$type": "cubicBezier",
+    "out": {
+      "$value": [0.2, 0.7, 0.3, 1]
+    }
+  },
+  "density-compact": {
+    "$type": "dimension",
+    "$description": "Tighter rows for dense tables; emitted under [data-density=\"compact\"].",
+    "space": {
+      "3": {
+        "$value": "8px"
+      },
+      "4": {
+        "$value": "12px"
+      },
+      "5": {
+        "$value": "14px"
+      },
+      "6": {
+        "$value": "18px"
+      }
+    },
+    "text": {
+      "base": {
+        "$value": "14px"
+      }
+    }
+  }
+}

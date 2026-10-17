@@ -1,0 +1,35 @@
+{
+  "name": "@schlaufuchs/design-system",
+  "version": "0.1.0",
+  "description": "The fox's design system: DTCG tokens, plain CSS components, typed class maps.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./classes": "./src/classes.ts",
+    "./tokens": "./dist/tokens.ts",
+    "./tokens.json": "./dist/tokens.json",
+    "./index.css": "./dist/index.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./tailwind.css": "./dist/theme.tailwind.css"
+  },
+  "files": [
+    "dist",
+    "src",
+    "tokens",
+    "docs"
+  ],
+  "scripts": {
+    "build": "bun scripts/build.ts",
+    "test": "bun test",
+    "tsc": "tsc --noEmit",
+    "biome": "biome check --error-on-warnings .",
+    "checks": "bun run build && bun run tsc && bun run biome && bun run test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.13",
+    "@types/bun": "latest",
+    "typescript": "^5.7.0"
+  }
+}
