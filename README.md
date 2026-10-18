@@ -179,7 +179,7 @@ heights](https://primer.style/foundations/primitives/size) (28/32/40); the
 | Token | Value | Where |
 |-------|-------|-------|
 | `radius.sm` | 4px | menu item, select item, checkbox, kbd, tooltip |
-| `radius.md` | 6px | every control: button, input, select, table wrapper |
+| `radius.md` | 6px | every control: button, input, textarea, select, select trigger |
 | `radius.lg` | 10px | surfaces: card, panel, popover, menu, select popup, toast |
 | `radius.xl` | 14px | dialog only |
 | `radius.pill` | 999px | badge, dot, switch, scrollbar |
@@ -212,9 +212,9 @@ One ring for the whole system: `outline: 2px solid var(--fox-color-accent-defaul
 with `outline-offset: 2px`, declared once in `base.css`. It never changes the
 element's radius. Components that sit on a border (tabs, menu and select
 items) pull the same ring inside with `outline-offset: -2px`; they never draw
-a second treatment, and no rule sets `outline: none` on a focusable element.
-The popup container of a menu, select or popover takes focus without a ring,
-because the highlighted item inside it carries the ring.
+a second treatment, and no rule removes the ring from a control. The popup
+container of a menu, select or popover is the one focused element without a
+ring: the highlighted item inside it carries the ring instead.
 
 Adapted from the [Fluent 2 focus
 rectangle](https://fluent2.microsoft.design/components/web/react/core/focus)
