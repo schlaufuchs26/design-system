@@ -15,6 +15,8 @@
 
 /* ── Button ─────────────────────────────────────────────────────────── */
 
+/* The base is the outline treatment, because Button's default variant is
+   outline in React: a bare class and data-variant="outline" look the same. */
 .fox-button {
   display: inline-flex;
   align-items: center;
@@ -22,10 +24,10 @@
   gap: var(--fox-space-2);
   height: var(--fox-control-md);
   padding: 0 var(--fox-space-3);
-  border: 1px solid transparent;
+  border: 1px solid var(--fox-color-border-default);
   border-radius: var(--fox-radius-md);
-  background: var(--fox-color-bg-elevated);
-  color: var(--fox-color-text-primary);
+  background: transparent;
+  color: var(--fox-color-text-secondary);
   font-family: var(--fox-font-sans);
   font-size: var(--fox-text-sm);
   font-weight: var(--fox-weight-medium);
@@ -50,12 +52,6 @@
 
 .fox-button[data-variant="solid"]:active {
   background: var(--fox-color-accent-press);
-}
-
-.fox-button[data-variant="outline"] {
-  background: transparent;
-  border-color: var(--fox-color-border-default);
-  color: var(--fox-color-text-secondary);
 }
 
 .fox-button[data-variant="outline"]:hover {

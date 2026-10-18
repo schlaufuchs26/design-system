@@ -21,7 +21,7 @@ export const overlays: Section[] = [
         cells: [
           cell(
             "scrim",
-            '<div style="position: relative; height: 120px; overflow: hidden; border-radius: var(--fox-radius-lg)"><div class="fox-dialog-backdrop" style="position: absolute"></div></div>',
+            '<div style="position: relative; height: 120px; overflow: hidden; border-radius: var(--fox-radius-lg); background: var(--fox-color-bg-surface); padding: var(--fox-space-4); color: var(--fox-color-text-secondary)">The page behind the dialog.<div class="fox-dialog-backdrop" style="position: absolute"></div></div>',
             true,
           ),
         ],
