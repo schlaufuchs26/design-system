@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkbox · Schlaufuchs design system</title>
+  <link rel="stylesheet" href="../design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    nav { padding: var(--fox-space-6) 0; font-size: var(--fox-text-sm); }
+    nav a { margin-right: var(--fox-space-3); }
+    h1 { font-size: var(--fox-text-xl); margin-bottom: var(--fox-space-2); }
+    .lead { color: var(--fox-color-text-muted); max-width: 68ch; margin-bottom: var(--fox-space-8); }
+    section { margin-bottom: var(--fox-space-8); }
+    section h2 { font-size: var(--fox-text-lg); margin-bottom: var(--fox-space-3); }
+    pre { padding: var(--fox-space-3); background: var(--fox-color-bg-inset); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); overflow-x: auto; font-size: var(--fox-text-xs); }
+    .demo { display: flex; flex-wrap: wrap; gap: var(--fox-space-3); align-items: center; padding: var(--fox-space-4); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); background: var(--fox-color-bg-panel); }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fox-text-sm); }
+    th, td { padding: var(--fox-space-2); border-bottom: 1px solid var(--fox-color-border-subtle); text-align: left; vertical-align: top; }
+    th { color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    td code { font-family: var(--fox-font-mono); font-size: var(--fox-text-xs); color: var(--fox-color-text-secondary); }
+    ul { padding-left: var(--fox-space-5); }
+    li { margin-bottom: var(--fox-space-1); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a href="../">← Design system</a><a href="./">All components</a></nav>
+    <h1>Checkbox</h1>
+    <p class="lead">A single on/off choice with its label. The control is a Base UI checkbox with role=checkbox and a hidden input for forms.</p>
+    <section>
+      <h2>Import</h2>
+      <pre>import { CheckboxField } from &quot;@schlaufuchs/react&quot;;</pre>
+    </section>
+    <section>
+      <h2>Example</h2>
+      <div class="demo">
+        <label class="fox-choice">
+          <button class="fox-checkbox" data-checked role="checkbox" aria-checked="true" type="button">
+            <span class="fox-checkbox-indicator"></span>
+          </button>
+          <span>Notify me</span>
+        </label>
+      </div>
+      <pre>&lt;label class=&quot;fox-choice&quot;&gt;
+  &lt;button class=&quot;fox-checkbox&quot; data-checked role=&quot;checkbox&quot; aria-checked=&quot;true&quot; type=&quot;button&quot;&gt;
+    &lt;span class=&quot;fox-checkbox-indicator&quot;&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;span&gt;Notify me&lt;/span&gt;
+&lt;/label&gt;</pre>
+    </section>
+    <section>
+      <h2>Props</h2>
+      <table>
+        <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+        <tbody>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>ReactNode (required)</code></td>
+          <td>—</td>
+          <td>The visible label and the accessible name.</td>
+        </tr>
+        <tr>
+          <td><code>checked</code></td>
+          <td><code>boolean</code></td>
+          <td>—</td>
+          <td>Controlled state.</td>
+        </tr>
+        <tr>
+          <td><code>defaultChecked</code></td>
+          <td><code>boolean</code></td>
+          <td>—</td>
+          <td>Uncontrolled initial state.</td>
+        </tr>
+        <tr>
+          <td><code>onCheckedChange</code></td>
+          <td><code>(checked: boolean) =&gt; void</code></td>
+          <td>—</td>
+          <td>Called after every change.</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td>—</td>
+          <td>Blocks interaction.</td>
+        </tr>
+        <tr>
+          <td><code>name / value</code></td>
+          <td><code>string</code></td>
+          <td>—</td>
+          <td>Submitted with a form.</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>Wrapping label, so clicking the text toggles the box.</li>
+        <li>Checked state is exposed as aria-checked and as data-checked for styling.</li>
+      </ul>
+    </section>
+      <section>
+        <h2>Keyboard</h2>
+        <ul>
+          <li>Space toggles the focused box.</li>
+          <li>Tab moves to the next control.</li>
+        </ul>
+      </section>
+  </div>
+</body>
+</html>

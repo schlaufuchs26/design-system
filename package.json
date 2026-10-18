@@ -1,28 +1,16 @@
 {
-  "name": "@schlaufuchs/design-system",
-  "version": "0.1.0",
-  "description": "The fox's design system: DTCG tokens, plain CSS components, typed class maps.",
+  "name": "schlaufuchs-design-system",
+  "version": "0.2.0",
+  "description": "The fox's design system: DTCG tokens and plain CSS in @schlaufuchs/tokens, typed React components in @schlaufuchs/react.",
   "type": "module",
   "license": "UNLICENSED",
   "private": true,
-  "exports": {
-    ".": "./src/index.ts",
-    "./classes": "./src/classes.ts",
-    "./tokens": "./dist/tokens.ts",
-    "./tokens.json": "./dist/tokens.json",
-    "./index.css": "./dist/index.css",
-    "./tokens.css": "./dist/tokens.css",
-    "./tailwind.css": "./dist/theme.tailwind.css"
-  },
-  "files": [
-    "dist",
-    "src",
-    "tokens",
-    "docs"
+  "workspaces": [
+    "packages/*"
   ],
   "scripts": {
-    "build": "bun scripts/build.ts",
-    "test": "bun test",
+    "build": "bun run --cwd packages/tokens build && bun run --cwd packages/react build && bun scripts/build-docs.ts",
+    "test": "bun run --cwd packages/tokens test && bun run --cwd packages/react test",
     "tsc": "tsc --noEmit",
     "biome": "biome check --error-on-warnings .",
     "checks": "bun run build && bun run tsc && bun run biome && bun run test"

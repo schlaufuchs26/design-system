@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Button · Schlaufuchs design system</title>
+  <link rel="stylesheet" href="../design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    nav { padding: var(--fox-space-6) 0; font-size: var(--fox-text-sm); }
+    nav a { margin-right: var(--fox-space-3); }
+    h1 { font-size: var(--fox-text-xl); margin-bottom: var(--fox-space-2); }
+    .lead { color: var(--fox-color-text-muted); max-width: 68ch; margin-bottom: var(--fox-space-8); }
+    section { margin-bottom: var(--fox-space-8); }
+    section h2 { font-size: var(--fox-text-lg); margin-bottom: var(--fox-space-3); }
+    pre { padding: var(--fox-space-3); background: var(--fox-color-bg-inset); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); overflow-x: auto; font-size: var(--fox-text-xs); }
+    .demo { display: flex; flex-wrap: wrap; gap: var(--fox-space-3); align-items: center; padding: var(--fox-space-4); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); background: var(--fox-color-bg-panel); }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fox-text-sm); }
+    th, td { padding: var(--fox-space-2); border-bottom: 1px solid var(--fox-color-border-subtle); text-align: left; vertical-align: top; }
+    th { color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    td code { font-family: var(--fox-font-mono); font-size: var(--fox-text-xs); color: var(--fox-color-text-secondary); }
+    ul { padding-left: var(--fox-space-5); }
+    li { margin-bottom: var(--fox-space-1); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a href="../">← Design system</a><a href="./">All components</a></nav>
+    <h1>Button</h1>
+    <p class="lead">The main action control. Variants and sizes come from the token scale; the element is a native button, so Enter and Space work without code.</p>
+    <section>
+      <h2>Import</h2>
+      <pre>import { Button } from &quot;@schlaufuchs/react&quot;;</pre>
+    </section>
+    <section>
+      <h2>Example</h2>
+      <div class="demo">
+        <button class="fox-button" data-variant="solid">Save</button>
+        <button class="fox-button" data-variant="outline">Cancel</button>
+        <button class="fox-button" data-variant="ghost">Dismiss</button>
+        <button class="fox-button" data-variant="danger">Delete</button>
+        <button class="fox-button" data-variant="solid" data-size="sm">Small</button>
+        <button class="fox-button" data-variant="solid" data-size="lg">Large</button>
+      </div>
+      <pre>&lt;button class=&quot;fox-button&quot; data-variant=&quot;solid&quot;&gt;Save&lt;/button&gt;
+&lt;button class=&quot;fox-button&quot; data-variant=&quot;outline&quot;&gt;Cancel&lt;/button&gt;
+&lt;button class=&quot;fox-button&quot; data-variant=&quot;ghost&quot;&gt;Dismiss&lt;/button&gt;
+&lt;button class=&quot;fox-button&quot; data-variant=&quot;danger&quot;&gt;Delete&lt;/button&gt;
+&lt;button class=&quot;fox-button&quot; data-variant=&quot;solid&quot; data-size=&quot;sm&quot;&gt;Small&lt;/button&gt;
+&lt;button class=&quot;fox-button&quot; data-variant=&quot;solid&quot; data-size=&quot;lg&quot;&gt;Large&lt;/button&gt;</pre>
+    </section>
+    <section>
+      <h2>Props</h2>
+      <table>
+        <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+        <tbody>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>&quot;solid&quot; | &quot;outline&quot; | &quot;ghost&quot; | &quot;danger&quot;</code></td>
+          <td><code>&quot;outline&quot;</code></td>
+          <td>Colour treatment; solid is the one primary action on a screen.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>&quot;sm&quot; | &quot;md&quot; | &quot;lg&quot; | &quot;icon&quot;</code></td>
+          <td><code>&quot;md&quot;</code></td>
+          <td>Height and padding from the space tokens.</td>
+        </tr>
+        <tr>
+          <td><code>type</code></td>
+          <td><code>&quot;button&quot; | &quot;submit&quot; | &quot;reset&quot;</code></td>
+          <td><code>&quot;button&quot;</code></td>
+          <td>Defaults to button so a form does not submit by accident.</td>
+        </tr>
+        <tr>
+          <td><code>...rest</code></td>
+          <td><code>ComponentPropsWithoutRef&lt;'button'&gt;</code></td>
+          <td>—</td>
+          <td>disabled, onClick, aria-*, form attributes.</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>Native button element; no role or tabindex is added.</li>
+        <li>The focus ring is the accent outline; disabled uses opacity and a not-allowed cursor.</li>
+        <li>An icon-only action uses IconButton with a required aria-label.</li>
+      </ul>
+    </section>
+      <section>
+        <h2>Keyboard</h2>
+        <ul>
+          <li>Enter or Space activates the button.</li>
+          <li>Tab moves to and from it.</li>
+        </ul>
+      </section>
+  </div>
+</body>
+</html>

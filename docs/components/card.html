@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card · Schlaufuchs design system</title>
+  <link rel="stylesheet" href="../design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    nav { padding: var(--fox-space-6) 0; font-size: var(--fox-text-sm); }
+    nav a { margin-right: var(--fox-space-3); }
+    h1 { font-size: var(--fox-text-xl); margin-bottom: var(--fox-space-2); }
+    .lead { color: var(--fox-color-text-muted); max-width: 68ch; margin-bottom: var(--fox-space-8); }
+    section { margin-bottom: var(--fox-space-8); }
+    section h2 { font-size: var(--fox-text-lg); margin-bottom: var(--fox-space-3); }
+    pre { padding: var(--fox-space-3); background: var(--fox-color-bg-inset); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); overflow-x: auto; font-size: var(--fox-text-xs); }
+    .demo { display: flex; flex-wrap: wrap; gap: var(--fox-space-3); align-items: center; padding: var(--fox-space-4); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); background: var(--fox-color-bg-panel); }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fox-text-sm); }
+    th, td { padding: var(--fox-space-2); border-bottom: 1px solid var(--fox-color-border-subtle); text-align: left; vertical-align: top; }
+    th { color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    td code { font-family: var(--fox-font-mono); font-size: var(--fox-text-xs); color: var(--fox-color-text-secondary); }
+    ul { padding-left: var(--fox-space-5); }
+    li { margin-bottom: var(--fox-space-1); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a href="../">← Design system</a><a href="./">All components</a></nav>
+    <h1>Card</h1>
+    <p class="lead">A surface with a header, body and footer. The header and footer take actions; the body holds content.</p>
+    <section>
+      <h2>Import</h2>
+      <pre>import { Card, CardHeader, CardBody, CardFooter } from &quot;@schlaufuchs/react&quot;;</pre>
+    </section>
+    <section>
+      <h2>Example</h2>
+      <div class="demo">
+        <section class="fox-card" data-elevated>
+          <header class="fox-card-header"><span class="fox-card-title">Feeds</span></header>
+          <div class="fox-card-body">4 feeds, 34 unread</div>
+          <footer class="fox-card-footer"><button class="fox-button" data-variant="outline">Scan</button></footer>
+        </section>
+      </div>
+      <pre>&lt;section class=&quot;fox-card&quot; data-elevated&gt;
+  &lt;header class=&quot;fox-card-header&quot;&gt;&lt;span class=&quot;fox-card-title&quot;&gt;Feeds&lt;/span&gt;&lt;/header&gt;
+  &lt;div class=&quot;fox-card-body&quot;&gt;4 feeds, 34 unread&lt;/div&gt;
+  &lt;footer class=&quot;fox-card-footer&quot;&gt;&lt;button class=&quot;fox-button&quot; data-variant=&quot;outline&quot;&gt;Scan&lt;/button&gt;&lt;/footer&gt;
+&lt;/section&gt;</pre>
+    </section>
+    <section>
+      <h2>Props</h2>
+      <table>
+        <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+        <tbody>
+        <tr>
+          <td><code>elevated</code></td>
+          <td><code>boolean</code></td>
+          <td>—</td>
+          <td>Raised background and a small shadow.</td>
+        </tr>
+        <tr>
+          <td><code>accent</code></td>
+          <td><code>boolean</code></td>
+          <td>—</td>
+          <td>Accent-tinted border.</td>
+        </tr>
+        <tr>
+          <td><code>padding</code></td>
+          <td><code>&quot;none&quot; | &quot;sm&quot; | &quot;md&quot;</code></td>
+          <td>—</td>
+          <td>Body padding; none lets a table run edge to edge.</td>
+        </tr>
+        <tr>
+          <td><code>CardHeader title</code></td>
+          <td><code>ReactNode</code></td>
+          <td>—</td>
+          <td>Rendered in the card title style.</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>Sections and headings stay the consumer's job; use a real heading inside the header when the card is a landmark.</li>
+      </ul>
+    </section>
+
+  </div>
+</body>
+</html>

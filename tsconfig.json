@@ -3,6 +3,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "jsx": "react-jsx",
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -12,7 +13,17 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["bun-types"]
+    "types": ["bun"]
   },
-  "include": ["scripts/**/*.ts", "src/**/*.ts", "tests/**/*.ts", "dist/**/*.ts"]
+  "include": [
+    "scripts/**/*.ts",
+    "packages/tokens/scripts/**/*.ts",
+    "packages/tokens/src/**/*.ts",
+    "packages/tokens/tests/**/*.ts",
+    "packages/tokens/dist/**/*.ts",
+    "packages/react/src/**/*.ts",
+    "packages/react/src/**/*.tsx",
+    "packages/react/tests/**/*.ts",
+    "packages/react/tests/**/*.tsx"
+  ]
 }

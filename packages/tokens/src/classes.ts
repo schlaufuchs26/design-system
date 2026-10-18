@@ -1,0 +1,172 @@
+/**
+ * Typed class and attribute maps for the component layer. Each recipe returns
+ * a flat object: `className` plus the `data-*` attributes the CSS reads, so
+ * React (`<button {...button({ variant: "solid" })} />`) and Vue
+ * (`<button v-bind="button({ variant: 'solid' })" />`) share one call site.
+ */
+
+export type ButtonVariant = "solid" | "outline" | "ghost" | "danger";
+export type ButtonSize = "sm" | "md" | "lg" | "icon";
+export type Tone =
+  | "neutral"
+  | "accent"
+  | "info"
+  | "queued"
+  | "success"
+  | "warning"
+  | "danger";
+export type CardPadding = "none" | "sm" | "md";
+
+/** `className` plus `data-*` attributes; every value is a string. */
+export type Recipe = { className: string } & {
+  [key: `data-${string}`]: string;
+} & {
+  "aria-invalid"?: boolean | "true" | "false";
+};
+
+function recipe(
+  className: string,
+  attrs: Record<string, string | undefined> = {},
+): Recipe {
+  const out: Record<string, string> = { className };
+  for (const [key, value] of Object.entries(attrs)) {
+    if (value === undefined) continue;
+    // ARIA attributes are not data attributes; keep them verbatim.
+    out[key.startsWith("aria-") ? key : `data-${key}`] = value;
+  }
+  return out as Recipe;
+}
+
+export interface ButtonOptions {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+}
+
+export function button(options: ButtonOptions = {}): Recipe {
+  return recipe("fox-button", { variant: options.variant, size: options.size });
+}
+
+export interface BadgeOptions {
+  tone?: Tone;
+  outline?: boolean;
+  mono?: boolean;
+}
+
+export function badge(options: BadgeOptions = {}): Recipe {
+  return recipe("fox-badge", {
+    tone: options.tone,
+    outline: options.outline ? "" : undefined,
+    mono: options.mono ? "" : undefined,
+  });
+}
+
+export interface CardOptions {
+  padding?: CardPadding;
+  elevated?: boolean;
+  accent?: boolean;
+}
+
+export function card(options: CardOptions = {}): Recipe {
+  return recipe("fox-card", {
+    padding: options.padding,
+    elevated: options.elevated ? "" : undefined,
+    accent: options.accent ? "" : undefined,
+  });
+}
+
+export function dot(tone?: Tone): Recipe {
+  return recipe("fox-dot", { tone });
+}
+
+export function field(): Recipe {
+  return recipe("fox-field");
+}
+
+export function label(): Recipe {
+  return recipe("fox-label");
+}
+
+export function hint(): Recipe {
+  return recipe("fox-hint");
+}
+
+export function input(invalid = false): Recipe {
+  return recipe("fox-input", { "aria-invalid": invalid ? "true" : undefined });
+}
+
+export function textarea(invalid = false): Recipe {
+  return recipe("fox-textarea", {
+    "aria-invalid": invalid ? "true" : undefined,
+  });
+}
+
+export function select(): Recipe {
+  return recipe("fox-select");
+}
+
+export interface TableOptions {
+  zebra?: boolean;
+}
+
+export function table(options: TableOptions = {}): Recipe {
+  return recipe("fox-table", { zebra: options.zebra ? "" : undefined });
+}
+
+export function dialog(): Recipe {
+  return recipe("fox-dialog");
+}
+
+/** Join class names, dropping falsy parts. */
+export function cx(...parts: Array<string | false | null | undefined>): string {
+  return parts.filter(Boolean).join(" ");
+}
+
+/**
+ * Class names for the component parts that carry no variant. One canonical
+ * label per part, so the React package and a static page cannot drift.
+ */
+export const parts = {
+  cardHeader: "fox-card-header",
+  cardTitle: "fox-card-title",
+  cardBody: "fox-card-body",
+  cardFooter: "fox-card-footer",
+  dialogBackdrop: "fox-dialog-backdrop",
+  dialogPopup: "fox-dialog-popup",
+  dialogHeader: "fox-dialog-header",
+  dialogTitle: "fox-dialog-title",
+  dialogBody: "fox-dialog-body",
+  dialogFooter: "fox-dialog-footer",
+  popover: "fox-popover",
+  popoverTitle: "fox-popover-title",
+  popoverDescription: "fox-popover-description",
+  tooltip: "fox-tooltip",
+  menu: "fox-menu",
+  menuItem: "fox-menu-item",
+  menuLabel: "fox-menu-label",
+  menuSeparator: "fox-menu-separator",
+  tabsList: "fox-tabs-list",
+  tab: "fox-tab",
+  tabsPanel: "fox-tabs-panel",
+  checkbox: "fox-checkbox",
+  checkboxIndicator: "fox-checkbox-indicator",
+  radio: "fox-radio",
+  radioIndicator: "fox-radio-indicator",
+  switch: "fox-switch",
+  switchThumb: "fox-switch-thumb",
+  selectTrigger: "fox-select-trigger",
+  selectIcon: "fox-select-icon",
+  selectPopup: "fox-select-popup",
+  selectItem: "fox-select-item",
+  toastViewport: "fox-toast-viewport",
+  toast: "fox-toast",
+  toastTitle: "fox-toast-title",
+  toastDescription: "fox-toast-description",
+  toastClose: "fox-toast-close",
+  tableWrap: "fox-table-wrap",
+  stack: "fox-stack",
+  row: "fox-row",
+  grid: "fox-grid",
+  num: "fox-num",
+  muted: "fox-muted",
+  mono: "fox-mono",
+} as const;

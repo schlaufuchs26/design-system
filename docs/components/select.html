@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select · Schlaufuchs design system</title>
+  <link rel="stylesheet" href="../design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    nav { padding: var(--fox-space-6) 0; font-size: var(--fox-text-sm); }
+    nav a { margin-right: var(--fox-space-3); }
+    h1 { font-size: var(--fox-text-xl); margin-bottom: var(--fox-space-2); }
+    .lead { color: var(--fox-color-text-muted); max-width: 68ch; margin-bottom: var(--fox-space-8); }
+    section { margin-bottom: var(--fox-space-8); }
+    section h2 { font-size: var(--fox-text-lg); margin-bottom: var(--fox-space-3); }
+    pre { padding: var(--fox-space-3); background: var(--fox-color-bg-inset); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); overflow-x: auto; font-size: var(--fox-text-xs); }
+    .demo { display: flex; flex-wrap: wrap; gap: var(--fox-space-3); align-items: center; padding: var(--fox-space-4); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); background: var(--fox-color-bg-panel); }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fox-text-sm); }
+    th, td { padding: var(--fox-space-2); border-bottom: 1px solid var(--fox-color-border-subtle); text-align: left; vertical-align: top; }
+    th { color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    td code { font-family: var(--fox-font-mono); font-size: var(--fox-text-xs); color: var(--fox-color-text-secondary); }
+    ul { padding-left: var(--fox-space-5); }
+    li { margin-bottom: var(--fox-space-1); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a href="../">← Design system</a><a href="./">All components</a></nav>
+    <h1>Select</h1>
+    <p class="lead">A single-choice listbox on Base UI. Arrow keys, typeahead and Escape work without custom code.</p>
+    <section>
+      <h2>Import</h2>
+      <pre>import { Select } from &quot;@schlaufuchs/react&quot;;</pre>
+    </section>
+    <section>
+      <h2>Example</h2>
+      <div class="demo">
+        <div class="fox-field">
+          <label class="fox-label" for="demo-filter">Filter</label>
+          <select class="fox-select" id="demo-filter">
+            <option>All runs</option>
+            <option>Passed only</option>
+          </select>
+        </div>
+      </div>
+      <pre>&lt;div class=&quot;fox-field&quot;&gt;
+  &lt;label class=&quot;fox-label&quot; for=&quot;demo-filter&quot;&gt;Filter&lt;/label&gt;
+  &lt;select class=&quot;fox-select&quot; id=&quot;demo-filter&quot;&gt;
+    &lt;option&gt;All runs&lt;/option&gt;
+    &lt;option&gt;Passed only&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</pre>
+    </section>
+    <section>
+      <h2>Props</h2>
+      <table>
+        <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+        <tbody>
+        <tr>
+          <td><code>options</code></td>
+          <td><code>readonly { value, label }[] (required)</code></td>
+          <td>—</td>
+          <td>The items to choose from.</td>
+        </tr>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string (required)</code></td>
+          <td>—</td>
+          <td>Names the listbox.</td>
+        </tr>
+        <tr>
+          <td><code>value</code></td>
+          <td><code>string</code></td>
+          <td>—</td>
+          <td>Controlled value; pair with onValueChange.</td>
+        </tr>
+        <tr>
+          <td><code>defaultValue</code></td>
+          <td><code>string</code></td>
+          <td>—</td>
+          <td>Uncontrolled initial value.</td>
+        </tr>
+        <tr>
+          <td><code>onValueChange</code></td>
+          <td><code>(value: string) =&gt; void</code></td>
+          <td>—</td>
+          <td>Called on every selection.</td>
+        </tr>
+        <tr>
+          <td><code>placeholder</code></td>
+          <td><code>string</code></td>
+          <td><code>&quot;Select…&quot;</code></td>
+          <td>Shown while nothing is chosen.</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td>—</td>
+          <td>Blocks opening and focus.</td>
+        </tr>
+        <tr>
+          <td><code>name</code></td>
+          <td><code>string</code></td>
+          <td>—</td>
+          <td>Submits the value with a form.</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>The trigger is a combobox; the popup is a listbox with aria-activedescendant tracking.</li>
+        <li>The chosen item is marked data-selected and repeats as the trigger's text.</li>
+      </ul>
+    </section>
+      <section>
+        <h2>Keyboard</h2>
+        <ul>
+          <li>ArrowDown opens the list; ArrowUp/Down move the highlight.</li>
+          <li>Enter selects, Escape closes without changing the value.</li>
+          <li>Typing letters jumps to the next matching option.</li>
+        </ul>
+      </section>
+  </div>
+</body>
+</html>

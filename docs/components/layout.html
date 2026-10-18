@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stack, Row and Grid · Schlaufuchs design system</title>
+  <link rel="stylesheet" href="../design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    nav { padding: var(--fox-space-6) 0; font-size: var(--fox-text-sm); }
+    nav a { margin-right: var(--fox-space-3); }
+    h1 { font-size: var(--fox-text-xl); margin-bottom: var(--fox-space-2); }
+    .lead { color: var(--fox-color-text-muted); max-width: 68ch; margin-bottom: var(--fox-space-8); }
+    section { margin-bottom: var(--fox-space-8); }
+    section h2 { font-size: var(--fox-text-lg); margin-bottom: var(--fox-space-3); }
+    pre { padding: var(--fox-space-3); background: var(--fox-color-bg-inset); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); overflow-x: auto; font-size: var(--fox-text-xs); }
+    .demo { display: flex; flex-wrap: wrap; gap: var(--fox-space-3); align-items: center; padding: var(--fox-space-4); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); background: var(--fox-color-bg-panel); }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fox-text-sm); }
+    th, td { padding: var(--fox-space-2); border-bottom: 1px solid var(--fox-color-border-subtle); text-align: left; vertical-align: top; }
+    th { color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    td code { font-family: var(--fox-font-mono); font-size: var(--fox-text-xs); color: var(--fox-color-text-secondary); }
+    ul { padding-left: var(--fox-space-5); }
+    li { margin-bottom: var(--fox-space-1); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a href="../">← Design system</a><a href="./">All components</a></nav>
+    <h1>Stack, Row and Grid</h1>
+    <p class="lead">The three layout helpers. Gaps are token steps (1=4px … 16=64px), never raw pixel values.</p>
+    <section>
+      <h2>Import</h2>
+      <pre>import { Stack, Row, Grid } from &quot;@schlaufuchs/react&quot;;</pre>
+    </section>
+    <section>
+      <h2>Example</h2>
+      <div class="demo">
+        <div class="fox-stack" style="gap: var(--fox-space-4)">
+          <div class="fox-row" style="gap: var(--fox-space-2)">a</div>
+          <div class="fox-grid" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))">b</div>
+        </div>
+      </div>
+      <pre>&lt;div class=&quot;fox-stack&quot; style=&quot;gap: var(--fox-space-4)&quot;&gt;
+  &lt;div class=&quot;fox-row&quot; style=&quot;gap: var(--fox-space-2)&quot;&gt;a&lt;/div&gt;
+  &lt;div class=&quot;fox-grid&quot; style=&quot;grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))&quot;&gt;b&lt;/div&gt;
+&lt;/div&gt;</pre>
+    </section>
+    <section>
+      <h2>Props</h2>
+      <table>
+        <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+        <tbody>
+        <tr>
+          <td><code>Stack gap</code></td>
+          <td><code>1|2|3|4|5|6|8|10|12|16</code></td>
+          <td><code>3</code></td>
+          <td>Vertical gap.</td>
+        </tr>
+        <tr>
+          <td><code>Row gap</code></td>
+          <td><code>1|2|3|4|5|6|8|10|12|16</code></td>
+          <td><code>2</code></td>
+          <td>Horizontal gap; the row wraps.</td>
+        </tr>
+        <tr>
+          <td><code>Grid min</code></td>
+          <td><code>number</code></td>
+          <td><code>240</code></td>
+          <td>Minimum column width in px.</td>
+        </tr>
+        <tr>
+          <td><code>Grid gap</code></td>
+          <td><code>1|2|3|4|5|6|8|10|12|16</code></td>
+          <td><code>4</code></td>
+          <td>Gap in both directions.</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>Layout is visual only; it does not change reading or focus order.</li>
+      </ul>
+    </section>
+
+  </div>
+</body>
+</html>

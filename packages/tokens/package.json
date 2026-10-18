@@ -1,0 +1,31 @@
+{
+  "name": "@schlaufuchs/tokens",
+  "version": "0.2.0",
+  "description": "DTCG tokens, generated CSS custom properties and typed class maps for the fox's frontends.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./classes": "./src/classes.ts",
+    "./tokens": "./dist/tokens.ts",
+    "./tokens.json": "./dist/tokens.json",
+    "./index.css": "./dist/index.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./tailwind.css": "./dist/theme.tailwind.css"
+  },
+  "files": [
+    "dist",
+    "src",
+    "tokens"
+  ],
+  "scripts": {
+    "build": "bun scripts/build.ts",
+    "test": "bun test",
+    "tsc": "tsc --noEmit",
+    "biome": "biome check --error-on-warnings ."
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

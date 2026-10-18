@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Components · Schlaufuchs design system</title>
+  <link rel="stylesheet" href="../design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    nav { padding: var(--fox-space-6) 0; font-size: var(--fox-text-sm); }
+    h1 { font-size: var(--fox-text-xl); margin-bottom: var(--fox-space-2); }
+    .lead { color: var(--fox-color-text-muted); max-width: 68ch; margin-bottom: var(--fox-space-8); }
+    .list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--fox-space-4); }
+    .list a { color: inherit; text-decoration: none; }
+    .list a:hover { border-color: var(--fox-color-border-strong); text-decoration: none; }
+    .list .fox-card-body { color: var(--fox-color-text-muted); font-size: var(--fox-text-sm); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a href="../">← Design system</a></nav>
+    <h1>Components</h1>
+    <p class="lead">Typed React components from <code>@schlaufuchs/react</code>, styled by the plain CSS classes in <code>@schlaufuchs/tokens</code>. Every page lists the props, the markup and the keyboard contract.</p>
+    <div class="list">
+      <a class="fox-card" data-elevated href="./button.html">
+        <span class="fox-card-header"><span class="fox-card-title">Button</span></span>
+        <span class="fox-card-body">The main action control. Variants and sizes come from the token scale; the element is a native button, so Enter and Space work without code.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./icon-button.html">
+        <span class="fox-card-header"><span class="fox-card-title">IconButton</span></span>
+        <span class="fox-card-body">A square button for a single glyph. The accessible name is a required prop because there is no visible text.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./text-field.html">
+        <span class="fox-card-header"><span class="fox-card-title">TextField</span></span>
+        <span class="fox-card-body">A labelled input with a hint and an error. The label, hint and error are wired to the input by generated ids.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./text-area.html">
+        <span class="fox-card-header"><span class="fox-card-title">TextArea</span></span>
+        <span class="fox-card-body">The multi-line sibling of TextField, with the same label, hint and error wiring.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./select.html">
+        <span class="fox-card-header"><span class="fox-card-title">Select</span></span>
+        <span class="fox-card-body">A single-choice listbox on Base UI. Arrow keys, typeahead and Escape work without custom code.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./checkbox.html">
+        <span class="fox-card-header"><span class="fox-card-title">Checkbox</span></span>
+        <span class="fox-card-body">A single on/off choice with its label. The control is a Base UI checkbox with role=checkbox and a hidden input for forms.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./switch.html">
+        <span class="fox-card-header"><span class="fox-card-title">Switch</span></span>
+        <span class="fox-card-body">An immediate on/off setting, styled as a track and thumb. Use it for a setting that applies at once, not for a form choice.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./radio-group.html">
+        <span class="fox-card-header"><span class="fox-card-title">Radio group</span></span>
+        <span class="fox-card-body">One choice out of a few, in a fieldset with a legend. Arrow keys move the selection.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./dialog.html">
+        <span class="fox-card-header"><span class="fox-card-title">Dialog</span></span>
+        <span class="fox-card-body">A modal on Base UI. Focus moves into the popup, Tab stays inside, Escape closes it and focus returns to the trigger.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./popover.html">
+        <span class="fox-card-header"><span class="fox-card-title">Popover</span></span>
+        <span class="fox-card-body">A non-modal panel anchored to a trigger. Use it for details or a small form; it does not trap focus.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./tooltip.html">
+        <span class="fox-card-header"><span class="fox-card-title">Tooltip</span></span>
+        <span class="fox-card-body">A short hint on hover or focus. The wrapper adds role=tooltip and aria-describedby, which Base UI 1.9 leaves to the consumer.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./menu.html">
+        <span class="fox-card-header"><span class="fox-card-title">Menu</span></span>
+        <span class="fox-card-body">A dropdown list of actions on Base UI. Arrow keys move, Enter selects and Escape closes.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./tabs.html">
+        <span class="fox-card-header"><span class="fox-card-title">Tabs</span></span>
+        <span class="fox-card-body">A tab list and its panels. The roving tab stop follows the arrow keys and only the active panel is in the tab order.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./table.html">
+        <span class="fox-card-header"><span class="fox-card-title">Table</span></span>
+        <span class="fox-card-body">A table with the design system's row styles, an optional scroll wrapper and numeric cells in the mono face.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./toast.html">
+        <span class="fox-card-header"><span class="fox-card-title">Toast</span></span>
+        <span class="fox-card-body">A short message after an action, posted from anywhere inside the provider with useToast().</span>
+      </a>
+      <a class="fox-card" data-elevated href="./badge.html">
+        <span class="fox-card-header"><span class="fox-card-title">Badge</span></span>
+        <span class="fox-card-body">A small status label with a tone from the status palette. Monospace is for counts and IDs.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./card.html">
+        <span class="fox-card-header"><span class="fox-card-title">Card</span></span>
+        <span class="fox-card-body">A surface with a header, body and footer. The header and footer take actions; the body holds content.</span>
+      </a>
+      <a class="fox-card" data-elevated href="./layout.html">
+        <span class="fox-card-header"><span class="fox-card-title">Stack, Row and Grid</span></span>
+        <span class="fox-card-body">The three layout helpers. Gaps are token steps (1=4px … 16=64px), never raw pixel values.</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

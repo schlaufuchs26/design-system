@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Popover · Schlaufuchs design system</title>
+  <link rel="stylesheet" href="../design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    nav { padding: var(--fox-space-6) 0; font-size: var(--fox-text-sm); }
+    nav a { margin-right: var(--fox-space-3); }
+    h1 { font-size: var(--fox-text-xl); margin-bottom: var(--fox-space-2); }
+    .lead { color: var(--fox-color-text-muted); max-width: 68ch; margin-bottom: var(--fox-space-8); }
+    section { margin-bottom: var(--fox-space-8); }
+    section h2 { font-size: var(--fox-text-lg); margin-bottom: var(--fox-space-3); }
+    pre { padding: var(--fox-space-3); background: var(--fox-color-bg-inset); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); overflow-x: auto; font-size: var(--fox-text-xs); }
+    .demo { display: flex; flex-wrap: wrap; gap: var(--fox-space-3); align-items: center; padding: var(--fox-space-4); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); background: var(--fox-color-bg-panel); }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fox-text-sm); }
+    th, td { padding: var(--fox-space-2); border-bottom: 1px solid var(--fox-color-border-subtle); text-align: left; vertical-align: top; }
+    th { color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    td code { font-family: var(--fox-font-mono); font-size: var(--fox-text-xs); color: var(--fox-color-text-secondary); }
+    ul { padding-left: var(--fox-space-5); }
+    li { margin-bottom: var(--fox-space-1); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a href="../">← Design system</a><a href="./">All components</a></nav>
+    <h1>Popover</h1>
+    <p class="lead">A non-modal panel anchored to a trigger. Use it for details or a small form; it does not trap focus.</p>
+    <section>
+      <h2>Import</h2>
+      <pre>import { PopoverPanel } from &quot;@schlaufuchs/react&quot;;</pre>
+    </section>
+    <section>
+      <h2>Example</h2>
+      <div class="demo">
+        <div class="fox-popover">
+          <p class="fox-popover-title">What is this?</p>
+          <p class="fox-popover-description">A short explanation.</p>
+        </div>
+      </div>
+      <pre>&lt;div class=&quot;fox-popover&quot;&gt;
+  &lt;p class=&quot;fox-popover-title&quot;&gt;What is this?&lt;/p&gt;
+  &lt;p class=&quot;fox-popover-description&quot;&gt;A short explanation.&lt;/p&gt;
+&lt;/div&gt;</pre>
+    </section>
+    <section>
+      <h2>Props</h2>
+      <table>
+        <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+        <tbody>
+        <tr>
+          <td><code>trigger</code></td>
+          <td><code>ReactElement (required)</code></td>
+          <td>—</td>
+          <td>Anchors the panel.</td>
+        </tr>
+        <tr>
+          <td><code>title / description</code></td>
+          <td><code>string / ReactNode</code></td>
+          <td>—</td>
+          <td>Optional heading and lead text.</td>
+        </tr>
+        <tr>
+          <td><code>children</code></td>
+          <td><code>ReactNode</code></td>
+          <td>—</td>
+          <td>The panel body.</td>
+        </tr>
+        <tr>
+          <td><code>open / defaultOpen</code></td>
+          <td><code>boolean</code></td>
+          <td>—</td>
+          <td>Controlled or uncontrolled visibility.</td>
+        </tr>
+        <tr>
+          <td><code>onOpenChange</code></td>
+          <td><code>(open: boolean) =&gt; void</code></td>
+          <td>—</td>
+          <td>Called when it opens or closes.</td>
+        </tr>
+        <tr>
+          <td><code>side</code></td>
+          <td><code>&quot;top&quot; | &quot;bottom&quot; | &quot;left&quot; | &quot;right&quot;</code></td>
+          <td><code>&quot;bottom&quot;</code></td>
+          <td>Preferred side; it flips when there is no room.</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>The popup is a dialog with the title as its name.</li>
+        <li>Focus is not trapped; Tab leaves the panel.</li>
+        <li>Escape and a click outside close it.</li>
+      </ul>
+    </section>
+      <section>
+        <h2>Keyboard</h2>
+        <ul>
+          <li>Enter or Space on the trigger opens it.</li>
+          <li>Escape closes it.</li>
+        </ul>
+      </section>
+  </div>
+</body>
+</html>

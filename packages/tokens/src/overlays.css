@@ -1,0 +1,436 @@
+/* Interactive parts on Base UI primitives: dialog, popover, tooltip,
+   menu, tabs, choice controls, select and toast. Same plain classes and
+   data attributes as the core layer, so a static page can use them too. */
+
+/* ── Dialog (Base UI) ───────────────────────────────────────────────── */
+
+/* The React Dialog renders a div, not a native <dialog>, so the popup and
+   its backdrop get their own classes; the surface styles are shared. */
+.fox-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--fox-color-overlay);
+  backdrop-filter: blur(2px);
+}
+
+.fox-dialog-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 41;
+  transform: translate(-50%, -50%);
+  max-height: calc(100vh - 2 * var(--fox-space-8));
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.fox-dialog-close {
+  margin-left: auto;
+}
+
+/* ── Popover ────────────────────────────────────────────────────────── */
+
+.fox-popover {
+  width: min(320px, calc(100vw - 24px));
+  padding: var(--fox-space-4);
+  border: 1px solid var(--fox-color-border-default);
+  border-radius: var(--fox-radius-lg);
+  background: var(--fox-color-bg-elevated);
+  color: var(--fox-color-text-secondary);
+  box-shadow: var(--fox-shadow-md);
+  outline: none;
+}
+
+.fox-popover-title {
+  color: var(--fox-color-text-primary);
+  font-size: var(--fox-text-sm);
+  font-weight: var(--fox-weight-semibold);
+}
+
+.fox-popover-description {
+  margin-top: var(--fox-space-1);
+  color: var(--fox-color-text-muted);
+  font-size: var(--fox-text-xs);
+}
+
+/* ── Tooltip ────────────────────────────────────────────────────────── */
+
+.fox-tooltip {
+  max-width: 280px;
+  padding: var(--fox-space-1) var(--fox-space-2);
+  border: 1px solid var(--fox-color-border-default);
+  border-radius: var(--fox-radius-sm);
+  background: var(--fox-color-bg-elevated);
+  color: var(--fox-color-text-secondary);
+  font-size: var(--fox-text-xs);
+  box-shadow: var(--fox-shadow-sm);
+}
+
+/* ── Menu ───────────────────────────────────────────────────────────── */
+
+.fox-menu {
+  min-width: 180px;
+  padding: var(--fox-space-1);
+  border: 1px solid var(--fox-color-border-default);
+  border-radius: var(--fox-radius-md);
+  background: var(--fox-color-bg-elevated);
+  color: var(--fox-color-text-secondary);
+  box-shadow: var(--fox-shadow-md);
+  outline: none;
+}
+
+.fox-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--fox-space-2);
+  width: 100%;
+  padding: 6px var(--fox-space-2);
+  border: 0;
+  border-radius: var(--fox-radius-sm);
+  background: transparent;
+  color: inherit;
+  font-family: var(--fox-font-sans);
+  font-size: var(--fox-text-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.fox-menu-item[data-highlighted],
+.fox-menu-item:focus-visible {
+  background: var(--fox-color-bg-surface);
+  color: var(--fox-color-text-primary);
+  outline: none;
+}
+
+.fox-menu-item[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.fox-menu-item[data-tone="danger"] {
+  color: var(--fox-color-status-danger);
+}
+
+.fox-menu-label {
+  padding: var(--fox-space-1) var(--fox-space-2);
+  color: var(--fox-color-text-muted);
+  font-size: var(--fox-text-xs);
+  font-weight: var(--fox-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.fox-menu-separator {
+  height: 1px;
+  margin: var(--fox-space-1) 0;
+  background: var(--fox-color-border-subtle);
+}
+
+/* ── Tabs ───────────────────────────────────────────────────────────── */
+
+.fox-tabs-list {
+  display: flex;
+  align-items: center;
+  gap: var(--fox-space-1);
+  border-bottom: 1px solid var(--fox-color-border-subtle);
+}
+
+.fox-tab {
+  padding: var(--fox-space-2) var(--fox-space-3);
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--fox-color-text-muted);
+  font-family: var(--fox-font-sans);
+  font-size: var(--fox-text-sm);
+  font-weight: var(--fox-weight-medium);
+  cursor: pointer;
+}
+
+.fox-tab:hover {
+  color: var(--fox-color-text-primary);
+}
+
+.fox-tab[data-active] {
+  border-bottom-color: var(--fox-color-accent-default);
+  color: var(--fox-color-text-primary);
+}
+
+.fox-tab:focus-visible {
+  outline: 2px solid var(--fox-color-accent-default);
+  outline-offset: -2px;
+}
+
+.fox-tab[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.fox-tabs-panel {
+  padding-top: var(--fox-space-3);
+  outline: none;
+}
+
+.fox-tabs-panel:focus-visible {
+  outline: 2px solid var(--fox-color-accent-default);
+  outline-offset: 2px;
+}
+
+/* ── Checkbox, radio, switch ────────────────────────────────────────── */
+
+.fox-checkbox,
+.fox-radio {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid var(--fox-color-border-strong);
+  background: var(--fox-color-bg-inset);
+  color: var(--fox-color-accent-ink);
+  cursor: pointer;
+}
+
+.fox-checkbox {
+  border-radius: var(--fox-radius-sm);
+}
+
+.fox-radio {
+  border-radius: var(--fox-radius-pill);
+}
+
+.fox-checkbox[data-checked],
+.fox-radio[data-checked] {
+  border-color: var(--fox-color-accent-default);
+  background: var(--fox-color-accent-default);
+}
+
+.fox-checkbox[data-disabled],
+.fox-radio[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.fox-checkbox:focus-visible,
+.fox-radio:focus-visible,
+.fox-switch:focus-visible,
+.fox-select-trigger:focus-visible {
+  outline: 2px solid var(--fox-color-accent-default);
+  outline-offset: 2px;
+}
+
+.fox-checkbox-indicator,
+.fox-radio-indicator {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: currentcolor;
+}
+
+.fox-radio-indicator {
+  border-radius: var(--fox-radius-pill);
+}
+
+.fox-switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid var(--fox-color-border-strong);
+  border-radius: var(--fox-radius-pill);
+  background: var(--fox-color-bg-inset);
+  cursor: pointer;
+  transition: background var(--fox-motion-fast) var(--fox-ease-out);
+}
+
+.fox-switch[data-checked] {
+  border-color: var(--fox-color-accent-default);
+  background: var(--fox-color-accent-default);
+}
+
+.fox-switch[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.fox-switch-thumb {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--fox-radius-pill);
+  background: var(--fox-color-text-secondary);
+  transform: translateX(2px);
+  transition: transform var(--fox-motion-fast) var(--fox-ease-out);
+}
+
+.fox-switch[data-checked] .fox-switch-thumb {
+  background: var(--fox-color-accent-ink);
+  transform: translateX(18px);
+}
+
+/* ── Select (Base UI) ───────────────────────────────────────────────── */
+
+.fox-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fox-space-2);
+  width: 100%;
+  min-height: 34px;
+  padding: 6px var(--fox-space-3);
+  border: 1px solid var(--fox-color-border-default);
+  border-radius: var(--fox-radius-md);
+  background: var(--fox-color-bg-inset);
+  color: var(--fox-color-text-primary);
+  font-family: var(--fox-font-sans);
+  font-size: var(--fox-text-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.fox-select-trigger[data-popup-open] {
+  border-color: var(--fox-color-accent-default);
+}
+
+.fox-select-trigger[data-placeholder] {
+  color: var(--fox-color-text-subtle);
+}
+
+.fox-select-icon {
+  color: var(--fox-color-text-muted);
+  font-size: var(--fox-text-xs);
+}
+
+.fox-select-popup {
+  min-width: var(--anchor-width, 180px);
+  padding: var(--fox-space-1);
+  border: 1px solid var(--fox-color-border-default);
+  border-radius: var(--fox-radius-md);
+  background: var(--fox-color-bg-elevated);
+  color: var(--fox-color-text-secondary);
+  box-shadow: var(--fox-shadow-md);
+  outline: none;
+}
+
+.fox-select-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fox-space-2);
+  padding: 6px var(--fox-space-2);
+  border-radius: var(--fox-radius-sm);
+  font-size: var(--fox-text-sm);
+  cursor: pointer;
+  outline: none;
+}
+
+.fox-select-item[data-highlighted] {
+  background: var(--fox-color-bg-surface);
+  color: var(--fox-color-text-primary);
+}
+
+.fox-select-item[data-selected] {
+  color: var(--fox-color-accent-text);
+}
+
+/* ── Toast ──────────────────────────────────────────────────────────── */
+
+.fox-toast-viewport {
+  position: fixed;
+  right: var(--fox-space-4);
+  bottom: var(--fox-space-4);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fox-space-2);
+  width: min(360px, calc(100vw - 32px));
+}
+
+.fox-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fox-space-2);
+  padding: var(--fox-space-3) var(--fox-space-4);
+  border: 1px solid var(--fox-color-border-default);
+  border-left: 3px solid var(--fox-color-accent-default);
+  border-radius: var(--fox-radius-md);
+  background: var(--fox-color-bg-elevated);
+  color: var(--fox-color-text-secondary);
+  box-shadow: var(--fox-shadow-md);
+}
+
+.fox-toast[data-tone="danger"] {
+  border-left-color: var(--fox-color-status-danger);
+}
+
+.fox-toast[data-tone="success"] {
+  border-left-color: var(--fox-color-status-success);
+}
+
+.fox-toast-title {
+  color: var(--fox-color-text-primary);
+  font-size: var(--fox-text-sm);
+  font-weight: var(--fox-weight-semibold);
+}
+
+.fox-toast-description {
+  margin-top: 2px;
+  color: var(--fox-color-text-muted);
+  font-size: var(--fox-text-xs);
+}
+
+.fox-toast-close {
+  margin-left: auto;
+  padding: 0 var(--fox-space-1);
+  border: 0;
+  background: transparent;
+  color: var(--fox-color-text-muted);
+  font-size: var(--fox-text-sm);
+  cursor: pointer;
+}
+
+.fox-toast-close:hover {
+  color: var(--fox-color-text-primary);
+}
+
+/* ── Table wrapper ──────────────────────────────────────────────────── */
+
+.fox-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--fox-color-border-subtle);
+  border-radius: var(--fox-radius-md);
+}
+
+.fox-table-wrap > .fox-table {
+  min-width: 520px;
+}
+
+/* ── Choice rows (checkbox, radio, switch with a label) ─────────────── */
+
+.fox-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fox-space-2);
+  color: var(--fox-color-text-secondary);
+  font-size: var(--fox-text-sm);
+  cursor: pointer;
+}
+
+.fox-choice[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.fox-choice-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fox-space-2);
+  border: 0;
+}
+
+.fox-choice-group > legend {
+  margin-bottom: var(--fox-space-2);
+}

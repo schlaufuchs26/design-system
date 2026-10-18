@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tabs · Schlaufuchs design system</title>
+  <link rel="stylesheet" href="../design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    nav { padding: var(--fox-space-6) 0; font-size: var(--fox-text-sm); }
+    nav a { margin-right: var(--fox-space-3); }
+    h1 { font-size: var(--fox-text-xl); margin-bottom: var(--fox-space-2); }
+    .lead { color: var(--fox-color-text-muted); max-width: 68ch; margin-bottom: var(--fox-space-8); }
+    section { margin-bottom: var(--fox-space-8); }
+    section h2 { font-size: var(--fox-text-lg); margin-bottom: var(--fox-space-3); }
+    pre { padding: var(--fox-space-3); background: var(--fox-color-bg-inset); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); overflow-x: auto; font-size: var(--fox-text-xs); }
+    .demo { display: flex; flex-wrap: wrap; gap: var(--fox-space-3); align-items: center; padding: var(--fox-space-4); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); background: var(--fox-color-bg-panel); }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fox-text-sm); }
+    th, td { padding: var(--fox-space-2); border-bottom: 1px solid var(--fox-color-border-subtle); text-align: left; vertical-align: top; }
+    th { color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    td code { font-family: var(--fox-font-mono); font-size: var(--fox-text-xs); color: var(--fox-color-text-secondary); }
+    ul { padding-left: var(--fox-space-5); }
+    li { margin-bottom: var(--fox-space-1); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a href="../">← Design system</a><a href="./">All components</a></nav>
+    <h1>Tabs</h1>
+    <p class="lead">A tab list and its panels. The roving tab stop follows the arrow keys and only the active panel is in the tab order.</p>
+    <section>
+      <h2>Import</h2>
+      <pre>import { TabsView } from &quot;@schlaufuchs/react&quot;;</pre>
+    </section>
+    <section>
+      <h2>Example</h2>
+      <div class="demo">
+        <div>
+          <div class="fox-tabs-list" role="tablist">
+            <button class="fox-tab" data-active role="tab" aria-selected="true" type="button">Overview</button>
+            <button class="fox-tab" role="tab" aria-selected="false" type="button">Runs</button>
+          </div>
+          <div class="fox-tabs-panel" role="tabpanel">Overview panel</div>
+        </div>
+      </div>
+      <pre>&lt;div&gt;
+  &lt;div class=&quot;fox-tabs-list&quot; role=&quot;tablist&quot;&gt;
+    &lt;button class=&quot;fox-tab&quot; data-active role=&quot;tab&quot; aria-selected=&quot;true&quot; type=&quot;button&quot;&gt;Overview&lt;/button&gt;
+    &lt;button class=&quot;fox-tab&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot; type=&quot;button&quot;&gt;Runs&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;fox-tabs-panel&quot; role=&quot;tabpanel&quot;&gt;Overview panel&lt;/div&gt;
+&lt;/div&gt;</pre>
+    </section>
+    <section>
+      <h2>Props</h2>
+      <table>
+        <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+        <tbody>
+        <tr>
+          <td><code>tabs</code></td>
+          <td><code>readonly { value, label, content, disabled? }[] (required)</code></td>
+          <td>—</td>
+          <td>The tabs and their panels.</td>
+        </tr>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string (required)</code></td>
+          <td>—</td>
+          <td>Names the tab list.</td>
+        </tr>
+        <tr>
+          <td><code>value / defaultValue</code></td>
+          <td><code>string</code></td>
+          <td>—</td>
+          <td>Controlled or uncontrolled selection; defaults to the first tab.</td>
+        </tr>
+        <tr>
+          <td><code>onValueChange</code></td>
+          <td><code>(value: string) =&gt; void</code></td>
+          <td>—</td>
+          <td>Called when the selection changes.</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>The list is a tablist and each tab controls its panel with aria-controls.</li>
+        <li>Panels are labelled by their tab and only the active one is rendered visible.</li>
+      </ul>
+    </section>
+      <section>
+        <h2>Keyboard</h2>
+        <ul>
+          <li>ArrowLeft/ArrowRight move the roving tab stop.</li>
+          <li>Home and End jump to the first and last tab.</li>
+          <li>Enter or Space activates the focused tab.</li>
+        </ul>
+      </section>
+  </div>
+</body>
+</html>

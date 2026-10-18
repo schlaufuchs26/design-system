@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radio group · Schlaufuchs design system</title>
+  <link rel="stylesheet" href="../design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    nav { padding: var(--fox-space-6) 0; font-size: var(--fox-text-sm); }
+    nav a { margin-right: var(--fox-space-3); }
+    h1 { font-size: var(--fox-text-xl); margin-bottom: var(--fox-space-2); }
+    .lead { color: var(--fox-color-text-muted); max-width: 68ch; margin-bottom: var(--fox-space-8); }
+    section { margin-bottom: var(--fox-space-8); }
+    section h2 { font-size: var(--fox-text-lg); margin-bottom: var(--fox-space-3); }
+    pre { padding: var(--fox-space-3); background: var(--fox-color-bg-inset); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); overflow-x: auto; font-size: var(--fox-text-xs); }
+    .demo { display: flex; flex-wrap: wrap; gap: var(--fox-space-3); align-items: center; padding: var(--fox-space-4); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); background: var(--fox-color-bg-panel); }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fox-text-sm); }
+    th, td { padding: var(--fox-space-2); border-bottom: 1px solid var(--fox-color-border-subtle); text-align: left; vertical-align: top; }
+    th { color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    td code { font-family: var(--fox-font-mono); font-size: var(--fox-text-xs); color: var(--fox-color-text-secondary); }
+    ul { padding-left: var(--fox-space-5); }
+    li { margin-bottom: var(--fox-space-1); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a href="../">← Design system</a><a href="./">All components</a></nav>
+    <h1>Radio group</h1>
+    <p class="lead">One choice out of a few, in a fieldset with a legend. Arrow keys move the selection.</p>
+    <section>
+      <h2>Import</h2>
+      <pre>import { RadioGroupField } from &quot;@schlaufuchs/react&quot;;</pre>
+    </section>
+    <section>
+      <h2>Example</h2>
+      <div class="demo">
+        <fieldset class="fox-choice-group">
+          <legend class="fox-label">Tone</legend>
+          <label class="fox-choice">
+            <button class="fox-radio" data-checked role="radio" aria-checked="true" type="button">
+              <span class="fox-radio-indicator"></span>
+            </button>
+            <span>Accent</span>
+          </label>
+          <label class="fox-choice">
+            <button class="fox-radio" role="radio" aria-checked="false" type="button">
+              <span class="fox-radio-indicator"></span>
+            </button>
+            <span>Neutral</span>
+          </label>
+        </fieldset>
+      </div>
+      <pre>&lt;fieldset class=&quot;fox-choice-group&quot;&gt;
+  &lt;legend class=&quot;fox-label&quot;&gt;Tone&lt;/legend&gt;
+  &lt;label class=&quot;fox-choice&quot;&gt;
+    &lt;button class=&quot;fox-radio&quot; data-checked role=&quot;radio&quot; aria-checked=&quot;true&quot; type=&quot;button&quot;&gt;
+      &lt;span class=&quot;fox-radio-indicator&quot;&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;span&gt;Accent&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label class=&quot;fox-choice&quot;&gt;
+    &lt;button class=&quot;fox-radio&quot; role=&quot;radio&quot; aria-checked=&quot;false&quot; type=&quot;button&quot;&gt;
+      &lt;span class=&quot;fox-radio-indicator&quot;&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;span&gt;Neutral&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/fieldset&gt;</pre>
+    </section>
+    <section>
+      <h2>Props</h2>
+      <table>
+        <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+        <tbody>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string (required)</code></td>
+          <td>—</td>
+          <td>Rendered as the fieldset legend.</td>
+        </tr>
+        <tr>
+          <td><code>options</code></td>
+          <td><code>readonly { value, label, disabled? }[] (required)</code></td>
+          <td>—</td>
+          <td>The choices.</td>
+        </tr>
+        <tr>
+          <td><code>value / defaultValue</code></td>
+          <td><code>string</code></td>
+          <td>—</td>
+          <td>Controlled or uncontrolled selection.</td>
+        </tr>
+        <tr>
+          <td><code>onValueChange</code></td>
+          <td><code>(value: string) =&gt; void</code></td>
+          <td>—</td>
+          <td>Called on every change.</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td>—</td>
+          <td>Disables the whole group.</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>The group is a fieldset with a legend, so the question is announced with each radio.</li>
+        <li>Only the selected radio is in the tab order.</li>
+      </ul>
+    </section>
+      <section>
+        <h2>Keyboard</h2>
+        <ul>
+          <li>Arrow keys move the selection through the group.</li>
+          <li>Tab leaves the group; Space selects the focused radio.</li>
+        </ul>
+      </section>
+  </div>
+</body>
+</html>

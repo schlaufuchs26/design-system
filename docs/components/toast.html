@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toast · Schlaufuchs design system</title>
+  <link rel="stylesheet" href="../design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    nav { padding: var(--fox-space-6) 0; font-size: var(--fox-text-sm); }
+    nav a { margin-right: var(--fox-space-3); }
+    h1 { font-size: var(--fox-text-xl); margin-bottom: var(--fox-space-2); }
+    .lead { color: var(--fox-color-text-muted); max-width: 68ch; margin-bottom: var(--fox-space-8); }
+    section { margin-bottom: var(--fox-space-8); }
+    section h2 { font-size: var(--fox-text-lg); margin-bottom: var(--fox-space-3); }
+    pre { padding: var(--fox-space-3); background: var(--fox-color-bg-inset); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); overflow-x: auto; font-size: var(--fox-text-xs); }
+    .demo { display: flex; flex-wrap: wrap; gap: var(--fox-space-3); align-items: center; padding: var(--fox-space-4); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); background: var(--fox-color-bg-panel); }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fox-text-sm); }
+    th, td { padding: var(--fox-space-2); border-bottom: 1px solid var(--fox-color-border-subtle); text-align: left; vertical-align: top; }
+    th { color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    td code { font-family: var(--fox-font-mono); font-size: var(--fox-text-xs); color: var(--fox-color-text-secondary); }
+    ul { padding-left: var(--fox-space-5); }
+    li { margin-bottom: var(--fox-space-1); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a href="../">← Design system</a><a href="./">All components</a></nav>
+    <h1>Toast</h1>
+    <p class="lead">A short message after an action, posted from anywhere inside the provider with useToast().</p>
+    <section>
+      <h2>Import</h2>
+      <pre>import { ToastProvider, useToast } from &quot;@schlaufuchs/react&quot;;</pre>
+    </section>
+    <section>
+      <h2>Example</h2>
+      <div class="demo">
+        <div class="fox-toast">
+          <div>
+            <p class="fox-toast-title">Saved</p>
+            <p class="fox-toast-description">The draft is safe</p>
+          </div>
+          <button class="fox-toast-close" aria-label="Dismiss" type="button">×</button>
+        </div>
+      </div>
+      <pre>&lt;div class=&quot;fox-toast&quot;&gt;
+  &lt;div&gt;
+    &lt;p class=&quot;fox-toast-title&quot;&gt;Saved&lt;/p&gt;
+    &lt;p class=&quot;fox-toast-description&quot;&gt;The draft is safe&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;button class=&quot;fox-toast-close&quot; aria-label=&quot;Dismiss&quot; type=&quot;button&quot;&gt;×&lt;/button&gt;
+&lt;/div&gt;</pre>
+    </section>
+    <section>
+      <h2>Props</h2>
+      <table>
+        <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+        <tbody>
+        <tr>
+          <td><code>ToastProvider children</code></td>
+          <td><code>ReactNode (required)</code></td>
+          <td>—</td>
+          <td>Wraps the app; renders the viewport once.</td>
+        </tr>
+        <tr>
+          <td><code>useToast().add</code></td>
+          <td><code>(toast: { title, description?, tone? }) =&gt; void</code></td>
+          <td>—</td>
+          <td>Posts a toast.</td>
+        </tr>
+        <tr>
+          <td><code>useToast().close</code></td>
+          <td><code>(id: string) =&gt; void</code></td>
+          <td>—</td>
+          <td>Dismisses a toast early.</td>
+        </tr>
+        <tr>
+          <td><code>tone</code></td>
+          <td><code>&quot;accent&quot; | &quot;success&quot; | &quot;danger&quot;</code></td>
+          <td><code>&quot;accent&quot;</code></td>
+          <td>Colours the left edge.</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>The viewport announces politely; a danger toast keeps the same live region.</li>
+        <li>The close button is hidden from the accessibility tree until the toast is expanded by hover or focus.</li>
+      </ul>
+    </section>
+      <section>
+        <h2>Keyboard</h2>
+        <ul>
+          <li>Focusing the toast expands it and reveals the close button.</li>
+        </ul>
+      </section>
+  </div>
+</body>
+</html>

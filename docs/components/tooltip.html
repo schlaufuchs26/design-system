@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tooltip · Schlaufuchs design system</title>
+  <link rel="stylesheet" href="../design-system.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { padding: 0 0 var(--fox-space-16); }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 var(--fox-space-6); }
+    nav { padding: var(--fox-space-6) 0; font-size: var(--fox-text-sm); }
+    nav a { margin-right: var(--fox-space-3); }
+    h1 { font-size: var(--fox-text-xl); margin-bottom: var(--fox-space-2); }
+    .lead { color: var(--fox-color-text-muted); max-width: 68ch; margin-bottom: var(--fox-space-8); }
+    section { margin-bottom: var(--fox-space-8); }
+    section h2 { font-size: var(--fox-text-lg); margin-bottom: var(--fox-space-3); }
+    pre { padding: var(--fox-space-3); background: var(--fox-color-bg-inset); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); overflow-x: auto; font-size: var(--fox-text-xs); }
+    .demo { display: flex; flex-wrap: wrap; gap: var(--fox-space-3); align-items: center; padding: var(--fox-space-4); border: 1px solid var(--fox-color-border-subtle); border-radius: var(--fox-radius-md); background: var(--fox-color-bg-panel); }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fox-text-sm); }
+    th, td { padding: var(--fox-space-2); border-bottom: 1px solid var(--fox-color-border-subtle); text-align: left; vertical-align: top; }
+    th { color: var(--fox-color-text-muted); font-size: var(--fox-text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    td code { font-family: var(--fox-font-mono); font-size: var(--fox-text-xs); color: var(--fox-color-text-secondary); }
+    ul { padding-left: var(--fox-space-5); }
+    li { margin-bottom: var(--fox-space-1); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a href="../">← Design system</a><a href="./">All components</a></nav>
+    <h1>Tooltip</h1>
+    <p class="lead">A short hint on hover or focus. The wrapper adds role=tooltip and aria-describedby, which Base UI 1.9 leaves to the consumer.</p>
+    <section>
+      <h2>Import</h2>
+      <pre>import { TooltipHint, TooltipProvider } from &quot;@schlaufuchs/react&quot;;</pre>
+    </section>
+    <section>
+      <h2>Example</h2>
+      <div class="demo">
+        <span class="fox-tooltip">Saves the draft</span>
+      </div>
+      <pre>&lt;span class=&quot;fox-tooltip&quot;&gt;Saves the draft&lt;/span&gt;</pre>
+    </section>
+    <section>
+      <h2>Props</h2>
+      <table>
+        <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+        <tbody>
+        <tr>
+          <td><code>trigger</code></td>
+          <td><code>ReactElement (required)</code></td>
+          <td>—</td>
+          <td>The element the hint describes.</td>
+        </tr>
+        <tr>
+          <td><code>content</code></td>
+          <td><code>ReactNode (required)</code></td>
+          <td>—</td>
+          <td>Short text, never interactive content.</td>
+        </tr>
+        <tr>
+          <td><code>side</code></td>
+          <td><code>&quot;top&quot; | &quot;bottom&quot; | &quot;left&quot; | &quot;right&quot;</code></td>
+          <td><code>&quot;top&quot;</code></td>
+          <td>Preferred side.</td>
+        </tr>
+        <tr>
+          <td><code>open / defaultOpen</code></td>
+          <td><code>boolean</code></td>
+          <td>—</td>
+          <td>Controlled or uncontrolled visibility.</td>
+        </tr>
+        <tr>
+          <td><code>TooltipProvider delay</code></td>
+          <td><code>number</code></td>
+          <td><code>400</code></td>
+          <td>Shared delay in ms for grouped tooltips.</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>The popup carries role=tooltip and the trigger points at it with aria-describedby.</li>
+        <li>The trigger keeps its own name; a tooltip is not a substitute for a label.</li>
+      </ul>
+    </section>
+      <section>
+        <h2>Keyboard</h2>
+        <ul>
+          <li>Focusing the trigger shows the hint; Escape hides it.</li>
+        </ul>
+      </section>
+  </div>
+</body>
+</html>
