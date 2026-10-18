@@ -3,6 +3,8 @@ import { type ComponentPropsWithoutRef, type ReactNode, useId } from "react";
 
 interface FieldShellProps {
   label: string;
+  /** Keeps the label for screen readers but out of the layout. */
+  hideLabel?: boolean;
   hint?: ReactNode;
   error?: string;
   /** Wires the label and the hint to the control. */
@@ -24,6 +26,7 @@ export interface TextFieldProps
 
 export function TextField({
   label,
+  hideLabel,
   hint,
   error,
   id,
@@ -36,7 +39,10 @@ export function TextField({
   const errorId = error ? `${inputId}-error` : undefined;
   return (
     <div className="fox-field">
-      <label className="fox-label" htmlFor={inputId}>
+      <label
+        className={hideLabel ? "fox-label fox-sr-only" : "fox-label"}
+        htmlFor={inputId}
+      >
         {label}
       </label>
       <input
@@ -68,6 +74,7 @@ export interface TextAreaProps
 
 export function TextArea({
   label,
+  hideLabel,
   hint,
   error,
   id,
@@ -80,7 +87,10 @@ export function TextArea({
   const errorId = error ? `${inputId}-error` : undefined;
   return (
     <div className="fox-field">
-      <label className="fox-label" htmlFor={inputId}>
+      <label
+        className={hideLabel ? "fox-label fox-sr-only" : "fox-label"}
+        htmlFor={inputId}
+      >
         {label}
       </label>
       <textarea

@@ -36,6 +36,13 @@ describe("TextField", () => {
     expect(value).toBe("fox");
   });
 
+  test("hideLabel keeps the name and drops the label from the layout", () => {
+    render(<TextField label="Search tickets" hideLabel />);
+    const input = screen.getByRole("textbox", { name: "Search tickets" });
+    expect(input).toBeInTheDocument();
+    expect(screen.getByText("Search tickets")).toHaveClass("fox-sr-only");
+  });
+
   test("no error means no aria-invalid and no alert", () => {
     render(<TextField label="Name" hint="Optional" />);
     const input = screen.getByRole("textbox", { name: "Name" });
