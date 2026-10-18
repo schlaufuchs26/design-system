@@ -116,7 +116,8 @@ component CSS (1-4px stay legal for borders and hairlines).
 | Where | Padding | Gap |
 |-------|---------|-----|
 | Control inline (sm / md / lg) | 8 / 12 / 16 | 8 |
-| Card, dialog, popover, toast | 16 | 8 |
+| Card, dialog, popover | 16 | 8 |
+| Toast | 12 vertical, 16 horizontal | 8 |
 | Card and dialog header/footer | 12 vertical, 16 horizontal | 8 |
 | Menu and select popup | 4 around the list, 8 inside an item | 8 |
 | Badge | 8 inline | 4 |

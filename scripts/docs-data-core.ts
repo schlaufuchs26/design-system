@@ -68,7 +68,7 @@ export const core: ComponentDoc[] = [
     ],
     accessibility: [
       "Requires aria-label; a tooltip can repeat the label but never replaces it.",
-      "Renders a 34×34 button from the icon size step.",
+      "Renders a 36×36 button from the md control step.",
     ],
     keyboard: ["Enter or Space activates it."],
   },
@@ -112,7 +112,7 @@ export const core: ComponentDoc[] = [
     accessibility: [
       "Every field has a visible label; the placeholder is not a label.",
       "The error text is announced as an alert and the input carries aria-invalid.",
-      "Focus uses the accent border and a 3px accent-subtle ring.",
+      "Focus is the shared 2px amber ring, like every other control.",
     ],
     keyboard: ["Standard text editing keys; Tab leaves the field."],
   },
