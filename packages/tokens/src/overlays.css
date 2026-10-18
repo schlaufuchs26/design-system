@@ -1,6 +1,10 @@
 /* Interactive parts on Base UI primitives: dialog, popover, tooltip,
    menu, tabs, choice controls, select and toast. Same plain classes and
-   data attributes as the core layer, so a static page can use them too. */
+   data attributes as the core layer, so a static page can use them too.
+
+   The same rules as components.css apply: control tokens for sizes, radius
+   sm inside / md for controls / lg for surfaces / xl for the dialog, the one
+   amber focus ring from base.css, and no literal above 4px. */
 
 /* ── Dialog (Base UI) ───────────────────────────────────────────────── */
 
@@ -33,7 +37,7 @@
 /* ── Popover ────────────────────────────────────────────────────────── */
 
 .fox-popover {
-  width: min(320px, calc(100vw - 24px));
+  width: min(var(--fox-measure-popover), calc(100vw - var(--fox-space-6)));
   padding: var(--fox-space-4);
   border: 1px solid var(--fox-color-border-default);
   border-radius: var(--fox-radius-lg);
@@ -57,8 +61,10 @@
 
 /* ── Tooltip ────────────────────────────────────────────────────────── */
 
+/* Deliberately the only sm-radius overlay: one line of text at 4px reads as
+   a hint, while 10px would make it a bubble like the popover. */
 .fox-tooltip {
-  max-width: 280px;
+  max-width: var(--fox-measure-tooltip);
   padding: var(--fox-space-1) var(--fox-space-2);
   border: 1px solid var(--fox-color-border-default);
   border-radius: var(--fox-radius-sm);
@@ -70,11 +76,13 @@
 
 /* ── Menu ───────────────────────────────────────────────────────────── */
 
+/* Menu, select popup and popover are the same kind of floating surface, so
+   they share radius, border and shadow. */
 .fox-menu {
-  min-width: 180px;
+  min-width: var(--fox-measure-menu);
   padding: var(--fox-space-1);
   border: 1px solid var(--fox-color-border-default);
-  border-radius: var(--fox-radius-md);
+  border-radius: var(--fox-radius-lg);
   background: var(--fox-color-bg-elevated);
   color: var(--fox-color-text-secondary);
   box-shadow: var(--fox-shadow-md);
@@ -86,7 +94,8 @@
   align-items: center;
   gap: var(--fox-space-2);
   width: 100%;
-  padding: 6px var(--fox-space-2);
+  min-height: var(--fox-control-sm);
+  padding: 0 var(--fox-space-2);
   border: 0;
   border-radius: var(--fox-radius-sm);
   background: transparent;
@@ -95,13 +104,21 @@
   font-size: var(--fox-text-sm);
   text-align: left;
   cursor: pointer;
+  transition:
+    background var(--fox-motion-fast) var(--fox-ease-out),
+    color var(--fox-motion-fast) var(--fox-ease-out);
 }
 
 .fox-menu-item[data-highlighted],
 .fox-menu-item:focus-visible {
-  background: var(--fox-color-bg-surface);
+  background: var(--fox-color-state-hover);
   color: var(--fox-color-text-primary);
-  outline: none;
+}
+
+/* Inside a popup the ring sits on the item, not around the popup. */
+.fox-menu-item:focus-visible,
+.fox-select-item:focus-visible {
+  outline-offset: -2px;
 }
 
 .fox-menu-item[data-disabled] {
@@ -138,7 +155,8 @@
 }
 
 .fox-tab {
-  padding: var(--fox-space-2) var(--fox-space-3);
+  min-height: var(--fox-control-md);
+  padding: 0 var(--fox-space-3);
   border: 0;
   border-bottom: 2px solid transparent;
   background: transparent;
@@ -147,6 +165,10 @@
   font-size: var(--fox-text-sm);
   font-weight: var(--fox-weight-medium);
   cursor: pointer;
+  transition:
+    background var(--fox-motion-fast) var(--fox-ease-out),
+    border-color var(--fox-motion-fast) var(--fox-ease-out),
+    color var(--fox-motion-fast) var(--fox-ease-out);
 }
 
 .fox-tab:hover {
@@ -158,8 +180,9 @@
   color: var(--fox-color-text-primary);
 }
 
+/* The same amber ring, drawn inside the tab so it does not cross the list's
+   bottom border. */
 .fox-tab:focus-visible {
-  outline: 2px solid var(--fox-color-accent-default);
   outline-offset: -2px;
 }
 
@@ -170,12 +193,6 @@
 
 .fox-tabs-panel {
   padding-top: var(--fox-space-3);
-  outline: none;
-}
-
-.fox-tabs-panel:focus-visible {
-  outline: 2px solid var(--fox-color-accent-default);
-  outline-offset: 2px;
 }
 
 /* ── Checkbox, radio, switch ────────────────────────────────────────── */
@@ -184,13 +201,16 @@
 .fox-radio {
   display: inline-grid;
   place-items: center;
-  width: 18px;
-  height: 18px;
+  width: var(--fox-control-check);
+  height: var(--fox-control-check);
   padding: 0;
   border: 1px solid var(--fox-color-border-strong);
   background: var(--fox-color-bg-inset);
   color: var(--fox-color-accent-ink);
   cursor: pointer;
+  transition:
+    background var(--fox-motion-fast) var(--fox-ease-out),
+    border-color var(--fox-motion-fast) var(--fox-ease-out);
 }
 
 .fox-checkbox {
@@ -199,6 +219,11 @@
 
 .fox-radio {
   border-radius: var(--fox-radius-pill);
+}
+
+.fox-checkbox:hover,
+.fox-radio:hover {
+  background: var(--fox-color-state-hover);
 }
 
 .fox-checkbox[data-checked],
@@ -213,36 +238,39 @@
   cursor: not-allowed;
 }
 
-.fox-checkbox:focus-visible,
-.fox-radio:focus-visible,
-.fox-switch:focus-visible,
-.fox-select-trigger:focus-visible {
-  outline: 2px solid var(--fox-color-accent-default);
-  outline-offset: 2px;
-}
-
 .fox-checkbox-indicator,
 .fox-radio-indicator {
   display: block;
-  width: 10px;
-  height: 10px;
   background: currentcolor;
 }
 
+.fox-checkbox-indicator {
+  width: var(--fox-space-3);
+  height: var(--fox-space-3);
+}
+
 .fox-radio-indicator {
+  width: var(--fox-space-2);
+  height: var(--fox-space-2);
   border-radius: var(--fox-radius-pill);
 }
 
 .fox-switch {
   position: relative;
-  width: 36px;
-  height: 20px;
+  width: var(--fox-control-switch);
+  height: var(--fox-control-switch-height);
   padding: 0;
   border: 1px solid var(--fox-color-border-strong);
   border-radius: var(--fox-radius-pill);
   background: var(--fox-color-bg-inset);
   cursor: pointer;
-  transition: background var(--fox-motion-fast) var(--fox-ease-out);
+  transition:
+    background var(--fox-motion-fast) var(--fox-ease-out),
+    border-color var(--fox-motion-fast) var(--fox-ease-out);
+}
+
+.fox-switch:hover {
+  background: var(--fox-color-state-hover);
 }
 
 .fox-switch[data-checked] {
@@ -257,35 +285,30 @@
 
 .fox-switch-thumb {
   display: block;
-  width: 14px;
-  height: 14px;
+  width: var(--fox-control-thumb);
+  height: var(--fox-control-thumb);
   border-radius: var(--fox-radius-pill);
   background: var(--fox-color-text-secondary);
   transform: translateX(2px);
-  transition: transform var(--fox-motion-fast) var(--fox-ease-out);
+  transition: transform var(--fox-motion-base) var(--fox-ease-out);
 }
 
 .fox-switch[data-checked] .fox-switch-thumb {
   background: var(--fox-color-accent-ink);
-  transform: translateX(18px);
+  transform: translateX(
+    calc(var(--fox-control-switch) - var(--fox-control-thumb) - 4px)
+  );
 }
 
 /* ── Select (Base UI) ───────────────────────────────────────────────── */
 
+/* The box itself is shared with the input in components.css; the trigger
+   only adds its layout, the open state and the placeholder colour. */
 .fox-select-trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--fox-space-2);
-  width: 100%;
-  min-height: 34px;
-  padding: 6px var(--fox-space-3);
-  border: 1px solid var(--fox-color-border-default);
-  border-radius: var(--fox-radius-md);
-  background: var(--fox-color-bg-inset);
-  color: var(--fox-color-text-primary);
-  font-family: var(--fox-font-sans);
-  font-size: var(--fox-text-sm);
   text-align: left;
   cursor: pointer;
 }
@@ -298,16 +321,22 @@
   color: var(--fox-color-text-subtle);
 }
 
+.fox-select-trigger:disabled,
+.fox-select-trigger[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .fox-select-icon {
   color: var(--fox-color-text-muted);
   font-size: var(--fox-text-xs);
 }
 
 .fox-select-popup {
-  min-width: var(--anchor-width, 180px);
+  min-width: var(--anchor-width, var(--fox-measure-menu));
   padding: var(--fox-space-1);
   border: 1px solid var(--fox-color-border-default);
-  border-radius: var(--fox-radius-md);
+  border-radius: var(--fox-radius-lg);
   background: var(--fox-color-bg-elevated);
   color: var(--fox-color-text-secondary);
   box-shadow: var(--fox-shadow-md);
@@ -319,15 +348,18 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--fox-space-2);
-  padding: 6px var(--fox-space-2);
+  min-height: var(--fox-control-sm);
+  padding: 0 var(--fox-space-2);
   border-radius: var(--fox-radius-sm);
   font-size: var(--fox-text-sm);
   cursor: pointer;
-  outline: none;
+  transition:
+    background var(--fox-motion-fast) var(--fox-ease-out),
+    color var(--fox-motion-fast) var(--fox-ease-out);
 }
 
 .fox-select-item[data-highlighted] {
-  background: var(--fox-color-bg-surface);
+  background: var(--fox-color-state-hover);
   color: var(--fox-color-text-primary);
 }
 
@@ -345,7 +377,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--fox-space-2);
-  width: min(360px, calc(100vw - 32px));
+  width: min(var(--fox-measure-toast), calc(100vw - var(--fox-space-8)));
 }
 
 .fox-toast {
@@ -355,7 +387,7 @@
   padding: var(--fox-space-3) var(--fox-space-4);
   border: 1px solid var(--fox-color-border-default);
   border-left: 3px solid var(--fox-color-accent-default);
-  border-radius: var(--fox-radius-md);
+  border-radius: var(--fox-radius-lg);
   background: var(--fox-color-bg-elevated);
   color: var(--fox-color-text-secondary);
   box-shadow: var(--fox-shadow-md);
@@ -376,7 +408,7 @@
 }
 
 .fox-toast-description {
-  margin-top: 2px;
+  margin-top: var(--fox-space-1);
   color: var(--fox-color-text-muted);
   font-size: var(--fox-text-xs);
 }
@@ -385,10 +417,12 @@
   margin-left: auto;
   padding: 0 var(--fox-space-1);
   border: 0;
+  border-radius: var(--fox-radius-sm);
   background: transparent;
   color: var(--fox-color-text-muted);
   font-size: var(--fox-text-sm);
   cursor: pointer;
+  transition: color var(--fox-motion-fast) var(--fox-ease-out);
 }
 
 .fox-toast-close:hover {
@@ -401,11 +435,11 @@
   width: 100%;
   overflow-x: auto;
   border: 1px solid var(--fox-color-border-subtle);
-  border-radius: var(--fox-radius-md);
+  border-radius: var(--fox-radius-lg);
 }
 
 .fox-table-wrap > .fox-table {
-  min-width: 520px;
+  min-width: var(--fox-measure-table);
 }
 
 /* ── Choice rows (checkbox, radio, switch with a label) ─────────────── */

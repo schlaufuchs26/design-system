@@ -8,9 +8,12 @@
   --fox-color-bg-surface: #1e1a17;
   --fox-color-bg-elevated: #2a2420;
   --fox-color-bg-inset: #100e0d;
+  --fox-color-state-hover: #ffffff14;
+  --fox-color-state-active: #ffffff29;
   --fox-color-border-subtle: #ffffff0d;
   --fox-color-border-default: #ffffff17;
   --fox-color-border-strong: #ffffff2e;
+  --fox-color-border-accent: #f2b13459;
   --fox-color-text-primary: #f8f3ea;
   --fox-color-text-secondary: #d9d0c4;
   --fox-color-text-muted: #a2988b;
@@ -19,6 +22,7 @@
   --fox-color-accent-default: #f2b134;
   --fox-color-accent-bright: #ffc94d;
   --fox-color-accent-hover: #ffd76e;
+  --fox-color-accent-press: #d99a1f;
   --fox-color-accent-ink: #1c1405;
   --fox-color-accent-text: #ffc94d;
   --fox-color-accent-subtle: #f2b13424;
@@ -28,6 +32,7 @@
   --fox-color-status-success: #6bb07a;
   --fox-color-status-warning: #e07b39;
   --fox-color-status-danger: #e0605a;
+  --fox-color-status-danger-ink: #1c1405;
   --fox-color-status-neutral-bg: #8f887d24;
   --fox-color-status-info-bg: #6f9fb824;
   --fox-color-status-queued-bg: #a08cbf24;
@@ -46,6 +51,24 @@
   --fox-space-10: 40px;
   --fox-space-12: 48px;
   --fox-space-16: 64px;
+
+  /* control */
+  --fox-control-sm: 28px;
+  --fox-control-md: 36px;
+  --fox-control-lg: 44px;
+  --fox-control-check: 18px;
+  --fox-control-switch: 36px;
+  --fox-control-switch-height: 20px;
+  --fox-control-thumb: 14px;
+  --fox-control-field-min: 80px;
+
+  /* measure */
+  --fox-measure-menu: 180px;
+  --fox-measure-tooltip: 280px;
+  --fox-measure-popover: 320px;
+  --fox-measure-toast: 360px;
+  --fox-measure-dialog: 560px;
+  --fox-measure-table: 520px;
 
   /* radius */
   --fox-radius-sm: 4px;
@@ -98,9 +121,12 @@
   --fox-color-bg-surface: #fffdf7;
   --fox-color-bg-elevated: #ffffff;
   --fox-color-bg-inset: #ece4d7;
+  --fox-color-state-hover: #1d18130f;
+  --fox-color-state-active: #1d18131f;
   --fox-color-border-subtle: #1d18130a;
   --fox-color-border-default: #1d18131f;
   --fox-color-border-strong: #1d18133d;
+  --fox-color-border-accent: #b8791a4d;
   --fox-color-text-primary: #1d1813;
   --fox-color-text-secondary: #453c33;
   --fox-color-text-muted: #6b6055;
@@ -109,6 +135,7 @@
   --fox-color-accent-default: #f2b134;
   --fox-color-accent-bright: #ffc94d;
   --fox-color-accent-hover: #ffd76e;
+  --fox-color-accent-press: #d99a1f;
   --fox-color-accent-ink: #1c1405;
   --fox-color-accent-text: #8a5a00;
   --fox-color-accent-subtle: #b8791a1f;
@@ -118,6 +145,7 @@
   --fox-color-status-success: #2c7a3d;
   --fox-color-status-warning: #9a6410;
   --fox-color-status-danger: #b0342f;
+  --fox-color-status-danger-ink: #fffaf5;
   --fox-color-status-neutral-bg: #6b60551f;
   --fox-color-status-info-bg: #2f6f961f;
   --fox-color-status-queued-bg: #6b4a8c1f;
@@ -136,4 +164,9 @@
 
   /* text */
   --fox-text-base: 14px;
+
+  /* control */
+  --fox-control-sm: 24px;
+  --fox-control-md: 32px;
+  --fox-control-lg: 40px;
 }

@@ -9,9 +9,12 @@
   --fox-color-bg-surface: #1e1a17;
   --fox-color-bg-elevated: #2a2420;
   --fox-color-bg-inset: #100e0d;
+  --fox-color-state-hover: #ffffff14;
+  --fox-color-state-active: #ffffff29;
   --fox-color-border-subtle: #ffffff0d;
   --fox-color-border-default: #ffffff17;
   --fox-color-border-strong: #ffffff2e;
+  --fox-color-border-accent: #f2b13459;
   --fox-color-text-primary: #f8f3ea;
   --fox-color-text-secondary: #d9d0c4;
   --fox-color-text-muted: #a2988b;
@@ -20,6 +23,7 @@
   --fox-color-accent-default: #f2b134;
   --fox-color-accent-bright: #ffc94d;
   --fox-color-accent-hover: #ffd76e;
+  --fox-color-accent-press: #d99a1f;
   --fox-color-accent-ink: #1c1405;
   --fox-color-accent-text: #ffc94d;
   --fox-color-accent-subtle: #f2b13424;
@@ -29,6 +33,7 @@
   --fox-color-status-success: #6bb07a;
   --fox-color-status-warning: #e07b39;
   --fox-color-status-danger: #e0605a;
+  --fox-color-status-danger-ink: #1c1405;
   --fox-color-status-neutral-bg: #8f887d24;
   --fox-color-status-info-bg: #6f9fb824;
   --fox-color-status-queued-bg: #a08cbf24;
@@ -47,6 +52,24 @@
   --fox-space-10: 40px;
   --fox-space-12: 48px;
   --fox-space-16: 64px;
+
+  /* control */
+  --fox-control-sm: 28px;
+  --fox-control-md: 36px;
+  --fox-control-lg: 44px;
+  --fox-control-check: 18px;
+  --fox-control-switch: 36px;
+  --fox-control-switch-height: 20px;
+  --fox-control-thumb: 14px;
+  --fox-control-field-min: 80px;
+
+  /* measure */
+  --fox-measure-menu: 180px;
+  --fox-measure-tooltip: 280px;
+  --fox-measure-popover: 320px;
+  --fox-measure-toast: 360px;
+  --fox-measure-dialog: 560px;
+  --fox-measure-table: 520px;
 
   /* radius */
   --fox-radius-sm: 4px;
@@ -99,9 +122,12 @@
   --fox-color-bg-surface: #fffdf7;
   --fox-color-bg-elevated: #ffffff;
   --fox-color-bg-inset: #ece4d7;
+  --fox-color-state-hover: #1d18130f;
+  --fox-color-state-active: #1d18131f;
   --fox-color-border-subtle: #1d18130a;
   --fox-color-border-default: #1d18131f;
   --fox-color-border-strong: #1d18133d;
+  --fox-color-border-accent: #b8791a4d;
   --fox-color-text-primary: #1d1813;
   --fox-color-text-secondary: #453c33;
   --fox-color-text-muted: #6b6055;
@@ -110,6 +136,7 @@
   --fox-color-accent-default: #f2b134;
   --fox-color-accent-bright: #ffc94d;
   --fox-color-accent-hover: #ffd76e;
+  --fox-color-accent-press: #d99a1f;
   --fox-color-accent-ink: #1c1405;
   --fox-color-accent-text: #8a5a00;
   --fox-color-accent-subtle: #b8791a1f;
@@ -119,6 +146,7 @@
   --fox-color-status-success: #2c7a3d;
   --fox-color-status-warning: #9a6410;
   --fox-color-status-danger: #b0342f;
+  --fox-color-status-danger-ink: #fffaf5;
   --fox-color-status-neutral-bg: #6b60551f;
   --fox-color-status-info-bg: #2f6f961f;
   --fox-color-status-queued-bg: #6b4a8c1f;
@@ -137,6 +165,11 @@
 
   /* text */
   --fox-text-base: 14px;
+
+  /* control */
+  --fox-control-sm: 24px;
+  --fox-control-md: 32px;
+  --fox-control-lg: 40px;
 }
 
 /* Base layer: reset, type, surfaces, focus. Reads only the generated
@@ -232,7 +265,7 @@ kbd {
   border: 1px solid var(--fox-color-border-default);
   border-bottom-width: 2px;
   border-radius: var(--fox-radius-sm);
-  padding: 1px 5px;
+  padding: 1px var(--fox-space-1);
   color: var(--fox-color-text-primary);
   font-size: var(--fox-text-xs);
 }
@@ -257,11 +290,13 @@ textarea {
   color: var(--fox-color-text-primary);
 }
 
-/* One ring for the whole system: keyboard focus is always the amber ring. */
+/* One ring for the whole system: keyboard focus is always the amber ring,
+   2px, 2px outside the element's own edge. It never changes the element's
+   radius; components that sit on a border (tabs, menu items) pull it inside
+   with outline-offset: -2px instead of drawing a second treatment. */
 :focus-visible {
   outline: 2px solid var(--fox-color-accent-default);
   outline-offset: 2px;
-  border-radius: var(--fox-radius-sm);
 }
 
 * {
@@ -306,7 +341,7 @@ textarea {
   color: var(--fox-color-text-muted);
   font-size: var(--fox-text-xs);
   font-weight: var(--fox-weight-semibold);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -378,7 +413,17 @@ textarea {
 /* Component layer: plain classes plus data attributes, so React, Vue and a
    static HTML page produce the same markup:
      <button class="fox-button" data-variant="solid" data-size="md">
-   No JavaScript, no build step. */
+   No JavaScript, no build step.
+
+   Rules this file follows (see the README section "The rules" for sources):
+   - Sizes come from the control tokens (28 / 36 / 44px); inline padding is
+     8 / 12 / 16px. Nothing is a literal above 4px.
+   - Radii: sm for inner items, md for controls, lg for surfaces, xl for the
+     dialog. Badges, dots and the switch are pills.
+   - Borders: default on an outer edge and on a control, subtle on a divider
+     inside a surface, strong on an unchecked control, accent for emphasis.
+   - Focus is the one amber ring from base.css; this file never draws its own.
+   - Colour transitions run on motion.fast, movement on motion.base. */
 
 /* ── Button ─────────────────────────────────────────────────────────── */
 
@@ -387,8 +432,8 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: var(--fox-space-2);
-  height: 34px;
-  padding: 0 var(--fox-space-4);
+  height: var(--fox-control-md);
+  padding: 0 var(--fox-space-3);
   border: 1px solid transparent;
   border-radius: var(--fox-radius-md);
   background: var(--fox-color-bg-elevated);
@@ -415,6 +460,10 @@ textarea {
   background: var(--fox-color-accent-hover);
 }
 
+.fox-button[data-variant="solid"]:active {
+  background: var(--fox-color-accent-press);
+}
+
 .fox-button[data-variant="outline"] {
   background: transparent;
   border-color: var(--fox-color-border-default);
@@ -422,9 +471,14 @@ textarea {
 }
 
 .fox-button[data-variant="outline"]:hover {
-  background: var(--fox-color-bg-surface);
+  background: var(--fox-color-state-hover);
   border-color: var(--fox-color-border-strong);
   color: var(--fox-color-text-primary);
+}
+
+.fox-button[data-variant="outline"]:active,
+.fox-button[data-variant="ghost"]:active {
+  background: var(--fox-color-state-active);
 }
 
 .fox-button[data-variant="ghost"] {
@@ -433,33 +487,37 @@ textarea {
 }
 
 .fox-button[data-variant="ghost"]:hover {
-  background: var(--fox-color-bg-surface);
+  background: var(--fox-color-state-hover);
   color: var(--fox-color-text-primary);
 }
 
 .fox-button[data-variant="danger"] {
   background: var(--fox-color-status-danger);
-  color: var(--fox-color-accent-ink);
+  color: var(--fox-color-status-danger-ink);
 }
 
 .fox-button[data-variant="danger"]:hover {
   filter: brightness(1.1);
 }
 
+.fox-button[data-variant="danger"]:active {
+  filter: brightness(0.92);
+}
+
 .fox-button[data-size="sm"] {
-  height: 28px;
-  padding: 0 var(--fox-space-3);
+  height: var(--fox-control-sm);
+  padding: 0 var(--fox-space-2);
   font-size: var(--fox-text-xs);
 }
 
 .fox-button[data-size="lg"] {
-  height: 42px;
-  padding: 0 var(--fox-space-6);
+  height: var(--fox-control-lg);
+  padding: 0 var(--fox-space-4);
   font-size: var(--fox-text-base);
 }
 
 .fox-button[data-size="icon"] {
-  width: 34px;
+  width: var(--fox-control-md);
   padding: 0;
 }
 
@@ -491,7 +549,7 @@ textarea {
 }
 
 .fox-card[data-accent] {
-  border-color: var(--fox-color-accent-subtle);
+  border-color: var(--fox-color-border-accent);
 }
 
 .fox-card-header {
@@ -534,7 +592,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: var(--fox-space-1);
-  padding: 1px var(--fox-space-2);
+  padding: 0 var(--fox-space-2);
   border: 1px solid transparent;
   border-radius: var(--fox-radius-pill);
   background: var(--fox-color-status-neutral-bg);
@@ -588,8 +646,8 @@ textarea {
 /* A dot for status columns and health rows. */
 .fox-dot {
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: var(--fox-space-2);
+  height: var(--fox-space-2);
   border-radius: var(--fox-radius-pill);
   background: var(--fox-color-status-neutral);
   flex-shrink: 0;
@@ -619,7 +677,7 @@ textarea {
 .fox-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--fox-space-2);
 }
 
 .fox-label {
@@ -641,21 +699,25 @@ textarea {
   color: var(--fox-color-status-danger);
 }
 
+/* One control box: input, textarea, native select and the Base UI select
+   trigger share it, so a form row has one height and one border. */
 .fox-input,
 .fox-textarea,
-.fox-select {
+.fox-select,
+.fox-select-trigger {
   width: 100%;
-  min-height: 34px;
-  padding: 6px var(--fox-space-3);
+  min-height: var(--fox-control-md);
+  padding: 0 var(--fox-space-3);
   border: 1px solid var(--fox-color-border-default);
   border-radius: var(--fox-radius-md);
   background: var(--fox-color-bg-inset);
   color: var(--fox-color-text-primary);
   font-family: var(--fox-font-sans);
   font-size: var(--fox-text-sm);
+  line-height: var(--fox-leading-normal);
   transition:
     border-color var(--fox-motion-fast) var(--fox-ease-out),
-    box-shadow var(--fox-motion-fast) var(--fox-ease-out);
+    background var(--fox-motion-fast) var(--fox-ease-out);
 }
 
 .fox-input::placeholder,
@@ -663,26 +725,23 @@ textarea {
   color: var(--fox-color-text-subtle);
 }
 
-.fox-input:focus,
-.fox-textarea:focus,
-.fox-select:focus {
-  outline: none;
-  border-color: var(--fox-color-accent-default);
-  box-shadow: 0 0 0 3px var(--fox-color-accent-subtle);
+.fox-input:disabled,
+.fox-textarea:disabled,
+.fox-select:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .fox-input[aria-invalid="true"],
-.fox-textarea[aria-invalid="true"] {
+.fox-textarea[aria-invalid="true"],
+.fox-select[aria-invalid="true"],
+.fox-select-trigger[aria-invalid="true"] {
   border-color: var(--fox-color-status-danger);
 }
 
-.fox-input[aria-invalid="true"]:focus,
-.fox-textarea[aria-invalid="true"]:focus {
-  box-shadow: 0 0 0 3px var(--fox-color-status-danger-bg);
-}
-
 .fox-textarea {
-  min-height: 80px;
+  min-height: var(--fox-control-field-min);
+  padding: var(--fox-space-2) var(--fox-space-3);
   resize: vertical;
 }
 
@@ -700,7 +759,7 @@ textarea {
 
 .fox-table th {
   padding: var(--fox-space-2) var(--fox-space-3);
-  border-bottom: 1px solid var(--fox-color-border-default);
+  border-bottom: 1px solid var(--fox-color-border-subtle);
   color: var(--fox-color-text-muted);
   font-size: var(--fox-text-xs);
   font-weight: var(--fox-weight-semibold);
@@ -715,8 +774,12 @@ textarea {
   vertical-align: top;
 }
 
+.fox-table tbody tr {
+  transition: background var(--fox-motion-fast) var(--fox-ease-out);
+}
+
 .fox-table tbody tr:hover {
-  background: var(--fox-color-bg-surface);
+  background: var(--fox-color-state-hover);
 }
 
 .fox-table[data-zebra] tbody tr:nth-child(even) {
@@ -736,8 +799,8 @@ textarea {
 /* ── Dialog (native <dialog>) ───────────────────────────────────────── */
 
 .fox-dialog {
-  width: min(560px, calc(100vw - 32px));
-  max-height: calc(100vh - 64px);
+  width: min(var(--fox-measure-dialog), calc(100vw - var(--fox-space-8)));
+  max-height: calc(100vh - var(--fox-space-16));
   padding: 0;
   border: 1px solid var(--fox-color-border-default);
   border-radius: var(--fox-radius-xl);
@@ -755,7 +818,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: var(--fox-space-2);
-  padding: var(--fox-space-4) var(--fox-space-5);
+  padding: var(--fox-space-3) var(--fox-space-4);
   border-bottom: 1px solid var(--fox-color-border-subtle);
 }
 
@@ -766,7 +829,7 @@ textarea {
 }
 
 .fox-dialog-body {
-  padding: var(--fox-space-5);
+  padding: var(--fox-space-4);
   overflow-y: auto;
 }
 
@@ -774,13 +837,17 @@ textarea {
   display: flex;
   justify-content: flex-end;
   gap: var(--fox-space-2);
-  padding: var(--fox-space-3) var(--fox-space-5);
+  padding: var(--fox-space-3) var(--fox-space-4);
   border-top: 1px solid var(--fox-color-border-subtle);
 }
 
 /* Interactive parts on Base UI primitives: dialog, popover, tooltip,
    menu, tabs, choice controls, select and toast. Same plain classes and
-   data attributes as the core layer, so a static page can use them too. */
+   data attributes as the core layer, so a static page can use them too.
+
+   The same rules as components.css apply: control tokens for sizes, radius
+   sm inside / md for controls / lg for surfaces / xl for the dialog, the one
+   amber focus ring from base.css, and no literal above 4px. */
 
 /* ── Dialog (Base UI) ───────────────────────────────────────────────── */
 
@@ -813,7 +880,7 @@ textarea {
 /* ── Popover ────────────────────────────────────────────────────────── */
 
 .fox-popover {
-  width: min(320px, calc(100vw - 24px));
+  width: min(var(--fox-measure-popover), calc(100vw - var(--fox-space-6)));
   padding: var(--fox-space-4);
   border: 1px solid var(--fox-color-border-default);
   border-radius: var(--fox-radius-lg);
@@ -837,8 +904,10 @@ textarea {
 
 /* ── Tooltip ────────────────────────────────────────────────────────── */
 
+/* Deliberately the only sm-radius overlay: one line of text at 4px reads as
+   a hint, while 10px would make it a bubble like the popover. */
 .fox-tooltip {
-  max-width: 280px;
+  max-width: var(--fox-measure-tooltip);
   padding: var(--fox-space-1) var(--fox-space-2);
   border: 1px solid var(--fox-color-border-default);
   border-radius: var(--fox-radius-sm);
@@ -850,11 +919,13 @@ textarea {
 
 /* ── Menu ───────────────────────────────────────────────────────────── */
 
+/* Menu, select popup and popover are the same kind of floating surface, so
+   they share radius, border and shadow. */
 .fox-menu {
-  min-width: 180px;
+  min-width: var(--fox-measure-menu);
   padding: var(--fox-space-1);
   border: 1px solid var(--fox-color-border-default);
-  border-radius: var(--fox-radius-md);
+  border-radius: var(--fox-radius-lg);
   background: var(--fox-color-bg-elevated);
   color: var(--fox-color-text-secondary);
   box-shadow: var(--fox-shadow-md);
@@ -866,7 +937,8 @@ textarea {
   align-items: center;
   gap: var(--fox-space-2);
   width: 100%;
-  padding: 6px var(--fox-space-2);
+  min-height: var(--fox-control-sm);
+  padding: 0 var(--fox-space-2);
   border: 0;
   border-radius: var(--fox-radius-sm);
   background: transparent;
@@ -875,13 +947,21 @@ textarea {
   font-size: var(--fox-text-sm);
   text-align: left;
   cursor: pointer;
+  transition:
+    background var(--fox-motion-fast) var(--fox-ease-out),
+    color var(--fox-motion-fast) var(--fox-ease-out);
 }
 
 .fox-menu-item[data-highlighted],
 .fox-menu-item:focus-visible {
-  background: var(--fox-color-bg-surface);
+  background: var(--fox-color-state-hover);
   color: var(--fox-color-text-primary);
-  outline: none;
+}
+
+/* Inside a popup the ring sits on the item, not around the popup. */
+.fox-menu-item:focus-visible,
+.fox-select-item:focus-visible {
+  outline-offset: -2px;
 }
 
 .fox-menu-item[data-disabled] {
@@ -918,7 +998,8 @@ textarea {
 }
 
 .fox-tab {
-  padding: var(--fox-space-2) var(--fox-space-3);
+  min-height: var(--fox-control-md);
+  padding: 0 var(--fox-space-3);
   border: 0;
   border-bottom: 2px solid transparent;
   background: transparent;
@@ -927,6 +1008,10 @@ textarea {
   font-size: var(--fox-text-sm);
   font-weight: var(--fox-weight-medium);
   cursor: pointer;
+  transition:
+    background var(--fox-motion-fast) var(--fox-ease-out),
+    border-color var(--fox-motion-fast) var(--fox-ease-out),
+    color var(--fox-motion-fast) var(--fox-ease-out);
 }
 
 .fox-tab:hover {
@@ -938,8 +1023,9 @@ textarea {
   color: var(--fox-color-text-primary);
 }
 
+/* The same amber ring, drawn inside the tab so it does not cross the list's
+   bottom border. */
 .fox-tab:focus-visible {
-  outline: 2px solid var(--fox-color-accent-default);
   outline-offset: -2px;
 }
 
@@ -950,12 +1036,6 @@ textarea {
 
 .fox-tabs-panel {
   padding-top: var(--fox-space-3);
-  outline: none;
-}
-
-.fox-tabs-panel:focus-visible {
-  outline: 2px solid var(--fox-color-accent-default);
-  outline-offset: 2px;
 }
 
 /* ── Checkbox, radio, switch ────────────────────────────────────────── */
@@ -964,13 +1044,16 @@ textarea {
 .fox-radio {
   display: inline-grid;
   place-items: center;
-  width: 18px;
-  height: 18px;
+  width: var(--fox-control-check);
+  height: var(--fox-control-check);
   padding: 0;
   border: 1px solid var(--fox-color-border-strong);
   background: var(--fox-color-bg-inset);
   color: var(--fox-color-accent-ink);
   cursor: pointer;
+  transition:
+    background var(--fox-motion-fast) var(--fox-ease-out),
+    border-color var(--fox-motion-fast) var(--fox-ease-out);
 }
 
 .fox-checkbox {
@@ -979,6 +1062,11 @@ textarea {
 
 .fox-radio {
   border-radius: var(--fox-radius-pill);
+}
+
+.fox-checkbox:hover,
+.fox-radio:hover {
+  background: var(--fox-color-state-hover);
 }
 
 .fox-checkbox[data-checked],
@@ -993,36 +1081,39 @@ textarea {
   cursor: not-allowed;
 }
 
-.fox-checkbox:focus-visible,
-.fox-radio:focus-visible,
-.fox-switch:focus-visible,
-.fox-select-trigger:focus-visible {
-  outline: 2px solid var(--fox-color-accent-default);
-  outline-offset: 2px;
-}
-
 .fox-checkbox-indicator,
 .fox-radio-indicator {
   display: block;
-  width: 10px;
-  height: 10px;
   background: currentcolor;
 }
 
+.fox-checkbox-indicator {
+  width: var(--fox-space-3);
+  height: var(--fox-space-3);
+}
+
 .fox-radio-indicator {
+  width: var(--fox-space-2);
+  height: var(--fox-space-2);
   border-radius: var(--fox-radius-pill);
 }
 
 .fox-switch {
   position: relative;
-  width: 36px;
-  height: 20px;
+  width: var(--fox-control-switch);
+  height: var(--fox-control-switch-height);
   padding: 0;
   border: 1px solid var(--fox-color-border-strong);
   border-radius: var(--fox-radius-pill);
   background: var(--fox-color-bg-inset);
   cursor: pointer;
-  transition: background var(--fox-motion-fast) var(--fox-ease-out);
+  transition:
+    background var(--fox-motion-fast) var(--fox-ease-out),
+    border-color var(--fox-motion-fast) var(--fox-ease-out);
+}
+
+.fox-switch:hover {
+  background: var(--fox-color-state-hover);
 }
 
 .fox-switch[data-checked] {
@@ -1037,35 +1128,30 @@ textarea {
 
 .fox-switch-thumb {
   display: block;
-  width: 14px;
-  height: 14px;
+  width: var(--fox-control-thumb);
+  height: var(--fox-control-thumb);
   border-radius: var(--fox-radius-pill);
   background: var(--fox-color-text-secondary);
   transform: translateX(2px);
-  transition: transform var(--fox-motion-fast) var(--fox-ease-out);
+  transition: transform var(--fox-motion-base) var(--fox-ease-out);
 }
 
 .fox-switch[data-checked] .fox-switch-thumb {
   background: var(--fox-color-accent-ink);
-  transform: translateX(18px);
+  transform: translateX(
+    calc(var(--fox-control-switch) - var(--fox-control-thumb) - 4px)
+  );
 }
 
 /* ── Select (Base UI) ───────────────────────────────────────────────── */
 
+/* The box itself is shared with the input in components.css; the trigger
+   only adds its layout, the open state and the placeholder colour. */
 .fox-select-trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--fox-space-2);
-  width: 100%;
-  min-height: 34px;
-  padding: 6px var(--fox-space-3);
-  border: 1px solid var(--fox-color-border-default);
-  border-radius: var(--fox-radius-md);
-  background: var(--fox-color-bg-inset);
-  color: var(--fox-color-text-primary);
-  font-family: var(--fox-font-sans);
-  font-size: var(--fox-text-sm);
   text-align: left;
   cursor: pointer;
 }
@@ -1078,16 +1164,22 @@ textarea {
   color: var(--fox-color-text-subtle);
 }
 
+.fox-select-trigger:disabled,
+.fox-select-trigger[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .fox-select-icon {
   color: var(--fox-color-text-muted);
   font-size: var(--fox-text-xs);
 }
 
 .fox-select-popup {
-  min-width: var(--anchor-width, 180px);
+  min-width: var(--anchor-width, var(--fox-measure-menu));
   padding: var(--fox-space-1);
   border: 1px solid var(--fox-color-border-default);
-  border-radius: var(--fox-radius-md);
+  border-radius: var(--fox-radius-lg);
   background: var(--fox-color-bg-elevated);
   color: var(--fox-color-text-secondary);
   box-shadow: var(--fox-shadow-md);
@@ -1099,15 +1191,18 @@ textarea {
   align-items: center;
   justify-content: space-between;
   gap: var(--fox-space-2);
-  padding: 6px var(--fox-space-2);
+  min-height: var(--fox-control-sm);
+  padding: 0 var(--fox-space-2);
   border-radius: var(--fox-radius-sm);
   font-size: var(--fox-text-sm);
   cursor: pointer;
-  outline: none;
+  transition:
+    background var(--fox-motion-fast) var(--fox-ease-out),
+    color var(--fox-motion-fast) var(--fox-ease-out);
 }
 
 .fox-select-item[data-highlighted] {
-  background: var(--fox-color-bg-surface);
+  background: var(--fox-color-state-hover);
   color: var(--fox-color-text-primary);
 }
 
@@ -1125,7 +1220,7 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: var(--fox-space-2);
-  width: min(360px, calc(100vw - 32px));
+  width: min(var(--fox-measure-toast), calc(100vw - var(--fox-space-8)));
 }
 
 .fox-toast {
@@ -1135,7 +1230,7 @@ textarea {
   padding: var(--fox-space-3) var(--fox-space-4);
   border: 1px solid var(--fox-color-border-default);
   border-left: 3px solid var(--fox-color-accent-default);
-  border-radius: var(--fox-radius-md);
+  border-radius: var(--fox-radius-lg);
   background: var(--fox-color-bg-elevated);
   color: var(--fox-color-text-secondary);
   box-shadow: var(--fox-shadow-md);
@@ -1156,7 +1251,7 @@ textarea {
 }
 
 .fox-toast-description {
-  margin-top: 2px;
+  margin-top: var(--fox-space-1);
   color: var(--fox-color-text-muted);
   font-size: var(--fox-text-xs);
 }
@@ -1165,10 +1260,12 @@ textarea {
   margin-left: auto;
   padding: 0 var(--fox-space-1);
   border: 0;
+  border-radius: var(--fox-radius-sm);
   background: transparent;
   color: var(--fox-color-text-muted);
   font-size: var(--fox-text-sm);
   cursor: pointer;
+  transition: color var(--fox-motion-fast) var(--fox-ease-out);
 }
 
 .fox-toast-close:hover {
@@ -1181,11 +1278,11 @@ textarea {
   width: 100%;
   overflow-x: auto;
   border: 1px solid var(--fox-color-border-subtle);
-  border-radius: var(--fox-radius-md);
+  border-radius: var(--fox-radius-lg);
 }
 
 .fox-table-wrap > .fox-table {
-  min-width: 520px;
+  min-width: var(--fox-measure-table);
 }
 
 /* ── Choice rows (checkbox, radio, switch with a label) ─────────────── */

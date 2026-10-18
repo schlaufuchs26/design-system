@@ -21,6 +21,15 @@
         "$value": "#100e0d"
       }
     },
+    "state": {
+      "$description": "State layers over any surface: a translucent step of the on-surface colour, so hover and press read on every background in both themes.",
+      "hover": {
+        "$value": "#ffffff14"
+      },
+      "active": {
+        "$value": "#ffffff29"
+      }
+    },
     "border": {
       "subtle": {
         "$value": "#ffffff0d"
@@ -30,6 +39,10 @@
       },
       "strong": {
         "$value": "#ffffff2e"
+      },
+      "accent": {
+        "$value": "#f2b13459",
+        "$description": "An accent-tinted edge, e.g. a card marked as active. A border token, not the accent fill."
       }
     },
     "text": {
@@ -61,6 +74,10 @@
       "hover": {
         "$value": "#ffd76e"
       },
+      "press": {
+        "$value": "#d99a1f",
+        "$description": "A pressed accent fill: darker than the resting amber, unlike hover."
+      },
       "ink": {
         "$value": "#1c1405",
         "$description": "Text on an accent fill."
@@ -91,6 +108,10 @@
       },
       "danger": {
         "$value": "#e0605a"
+      },
+      "danger-ink": {
+        "$value": "#1c1405",
+        "$description": "Text on a danger fill: warm black on the light danger red, warm white on the darker light-theme red."
       },
       "neutral-bg": {
         "$value": "#8f887d24"
@@ -132,6 +153,14 @@
         "$value": "#ece4d7"
       }
     },
+    "state": {
+      "hover": {
+        "$value": "#1d18130f"
+      },
+      "active": {
+        "$value": "#1d18131f"
+      }
+    },
     "border": {
       "subtle": {
         "$value": "#1d18130a"
@@ -141,6 +170,9 @@
       },
       "strong": {
         "$value": "#1d18133d"
+      },
+      "accent": {
+        "$value": "#b8791a4d"
       }
     },
     "text": {
@@ -171,6 +203,9 @@
       "hover": {
         "$value": "#ffd76e"
       },
+      "press": {
+        "$value": "#d99a1f"
+      },
       "ink": {
         "$value": "#1c1405"
       },
@@ -199,6 +234,9 @@
       },
       "danger": {
         "$value": "#b0342f"
+      },
+      "danger-ink": {
+        "$value": "#fffaf5"
       },
       "neutral-bg": {
         "$value": "#6b60551f"
@@ -252,6 +290,57 @@
     },
     "16": {
       "$value": "64px"
+    }
+  },
+  "control": {
+    "$type": "dimension",
+    "$description": "Control heights and the fixed sizes of the small controls. Every interactive control takes one of these, so buttons, inputs, selects, tabs and menu rows line up on the same three steps.",
+    "sm": {
+      "$value": "28px"
+    },
+    "md": {
+      "$value": "36px"
+    },
+    "lg": {
+      "$value": "44px"
+    },
+    "check": {
+      "$value": "18px"
+    },
+    "switch": {
+      "$value": "36px"
+    },
+    "switch-height": {
+      "$value": "20px"
+    },
+    "thumb": {
+      "$value": "14px"
+    },
+    "field-min": {
+      "$value": "80px",
+      "$description": "Minimum height of a textarea."
+    }
+  },
+  "measure": {
+    "$type": "dimension",
+    "$description": "The one width of each floating or scrolling surface; a component that needs more room changes its token, not a literal.",
+    "menu": {
+      "$value": "180px"
+    },
+    "tooltip": {
+      "$value": "280px"
+    },
+    "popover": {
+      "$value": "320px"
+    },
+    "toast": {
+      "$value": "360px"
+    },
+    "dialog": {
+      "$value": "560px"
+    },
+    "table": {
+      "$value": "520px"
     }
   },
   "radius": {
@@ -382,6 +471,17 @@
     "text": {
       "base": {
         "$value": "14px"
+      }
+    },
+    "control": {
+      "sm": {
+        "$value": "24px"
+      },
+      "md": {
+        "$value": "32px"
+      },
+      "lg": {
+        "$value": "40px"
       }
     }
   }

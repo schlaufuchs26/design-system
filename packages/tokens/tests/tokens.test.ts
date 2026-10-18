@@ -90,6 +90,15 @@ describe.each([
     expect(
       contrast(token("accent.ink"), token("accent.default")),
     ).toBeGreaterThanOrEqual(4.5);
+    expect(
+      contrast(token("accent.ink"), token("accent.press")),
+    ).toBeGreaterThanOrEqual(4.5);
+  });
+
+  test("danger ink on a danger fill", () => {
+    expect(
+      contrast(token("status.danger-ink"), token("status.danger")),
+    ).toBeGreaterThanOrEqual(4.5);
   });
 
   test("accent text on panels", () => {
@@ -121,4 +130,27 @@ test("subtle text is still legible (>= 3:1)", () => {
   expect(
     contrast(value("color.text.subtle"), value("color.bg.panel")),
   ).toBeGreaterThanOrEqual(3);
+});
+
+describe("size scale", () => {
+  const px = (path: string) => Number.parseInt(value(path), 10);
+
+  test("control steps are 8px apart", () => {
+    expect(px("control.md") - px("control.sm")).toBe(8);
+    expect(px("control.lg") - px("control.md")).toBe(8);
+  });
+
+  test("the switch fits its track", () => {
+    // thumb + 2px inset on both sides, so the checked thumb lands flush.
+    expect(px("control.switch-height") - px("control.thumb")).toBe(6);
+    expect(px("control.switch") - px("control.thumb")).toBe(22);
+  });
+
+  test("compact density shrinks every control step", () => {
+    for (const step of ["sm", "md", "lg"]) {
+      expect(px(`density-compact.control.${step}`)).toBeLessThan(
+        px(`control.${step}`),
+      );
+    }
+  });
 });

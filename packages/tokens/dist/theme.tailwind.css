@@ -6,9 +6,12 @@
   --color-fox-bg-surface: #1e1a17;
   --color-fox-bg-elevated: #2a2420;
   --color-fox-bg-inset: #100e0d;
+  --color-fox-state-hover: #ffffff14;
+  --color-fox-state-active: #ffffff29;
   --color-fox-border-subtle: #ffffff0d;
   --color-fox-border-default: #ffffff17;
   --color-fox-border-strong: #ffffff2e;
+  --color-fox-border-accent: #f2b13459;
   --color-fox-text-primary: #f8f3ea;
   --color-fox-text-secondary: #d9d0c4;
   --color-fox-text-muted: #a2988b;
@@ -17,6 +20,7 @@
   --color-fox-accent-default: #f2b134;
   --color-fox-accent-bright: #ffc94d;
   --color-fox-accent-hover: #ffd76e;
+  --color-fox-accent-press: #d99a1f;
   --color-fox-accent-ink: #1c1405;
   --color-fox-accent-text: #ffc94d;
   --color-fox-accent-subtle: #f2b13424;
@@ -26,6 +30,7 @@
   --color-fox-status-success: #6bb07a;
   --color-fox-status-warning: #e07b39;
   --color-fox-status-danger: #e0605a;
+  --color-fox-status-danger-ink: #1c1405;
   --color-fox-status-neutral-bg: #8f887d24;
   --color-fox-status-info-bg: #6f9fb824;
   --color-fox-status-queued-bg: #a08cbf24;

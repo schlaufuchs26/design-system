@@ -6,6 +6,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { type ComponentDoc, components } from "./docs-data";
+import { galleryPage } from "./gallery";
 
 const DOCS = join(import.meta.dir, "..", "docs", "components");
 
@@ -156,4 +157,5 @@ for (const doc of components) {
   writeFileSync(join(DOCS, `${doc.slug}.html`), page(doc));
 }
 writeFileSync(join(DOCS, "index.html"), indexPage());
-console.log(`${components.length} component pages`);
+writeFileSync(join(DOCS, "..", "gallery.html"), galleryPage());
+console.log(`${components.length} component pages, one gallery`);

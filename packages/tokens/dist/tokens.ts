@@ -9,10 +9,15 @@ export const tokens = {
       "elevated": "#2a2420",
       "inset": "#100e0d"
     },
+    "state": {
+      "hover": "#ffffff14",
+      "active": "#ffffff29"
+    },
     "border": {
       "subtle": "#ffffff0d",
       "default": "#ffffff17",
-      "strong": "#ffffff2e"
+      "strong": "#ffffff2e",
+      "accent": "#f2b13459"
     },
     "text": {
       "primary": "#f8f3ea",
@@ -25,6 +30,7 @@ export const tokens = {
       "default": "#f2b134",
       "bright": "#ffc94d",
       "hover": "#ffd76e",
+      "press": "#d99a1f",
       "ink": "#1c1405",
       "text": "#ffc94d",
       "subtle": "#f2b13424"
@@ -36,6 +42,7 @@ export const tokens = {
       "success": "#6bb07a",
       "warning": "#e07b39",
       "danger": "#e0605a",
+      "danger-ink": "#1c1405",
       "neutral-bg": "#8f887d24",
       "info-bg": "#6f9fb824",
       "queued-bg": "#a08cbf24",
@@ -55,6 +62,24 @@ export const tokens = {
     "10": "40px",
     "12": "48px",
     "16": "64px"
+  },
+  "control": {
+    "sm": "28px",
+    "md": "36px",
+    "lg": "44px",
+    "check": "18px",
+    "switch": "36px",
+    "switch-height": "20px",
+    "thumb": "14px",
+    "field-min": "80px"
+  },
+  "measure": {
+    "menu": "180px",
+    "tooltip": "280px",
+    "popover": "320px",
+    "toast": "360px",
+    "dialog": "560px",
+    "table": "520px"
   },
   "radius": {
     "sm": "4px",
@@ -124,10 +149,15 @@ export const lightColor = {
     "elevated": "#ffffff",
     "inset": "#ece4d7"
   },
+  "state": {
+    "hover": "#1d18130f",
+    "active": "#1d18131f"
+  },
   "border": {
     "subtle": "#1d18130a",
     "default": "#1d18131f",
-    "strong": "#1d18133d"
+    "strong": "#1d18133d",
+    "accent": "#b8791a4d"
   },
   "text": {
     "primary": "#1d1813",
@@ -140,6 +170,7 @@ export const lightColor = {
     "default": "#f2b134",
     "bright": "#ffc94d",
     "hover": "#ffd76e",
+    "press": "#d99a1f",
     "ink": "#1c1405",
     "text": "#8a5a00",
     "subtle": "#b8791a1f"
@@ -151,6 +182,7 @@ export const lightColor = {
     "success": "#2c7a3d",
     "warning": "#9a6410",
     "danger": "#b0342f",
+    "danger-ink": "#fffaf5",
     "neutral-bg": "#6b60551f",
     "info-bg": "#2f6f961f",
     "queued-bg": "#6b4a8c1f",
@@ -170,16 +202,22 @@ export const compactDensity = {
   },
   "text": {
     "base": "14px"
+  },
+  "control": {
+    "sm": "24px",
+    "md": "32px",
+    "lg": "40px"
   }
 } as const;
 
 export type Tokens = typeof tokens;
-export type ColorToken = "color.bg.deep" | "color.bg.panel" | "color.bg.surface" | "color.bg.elevated" | "color.bg.inset" | "color.border.subtle" | "color.border.default" | "color.border.strong" | "color.text.primary" | "color.text.secondary" | "color.text.muted" | "color.text.subtle" | "color.overlay" | "color.accent.default" | "color.accent.bright" | "color.accent.hover" | "color.accent.ink" | "color.accent.text" | "color.accent.subtle" | "color.status.neutral" | "color.status.info" | "color.status.queued" | "color.status.success" | "color.status.warning" | "color.status.danger" | "color.status.neutral-bg" | "color.status.info-bg" | "color.status.queued-bg" | "color.status.success-bg" | "color.status.warning-bg" | "color.status.danger-bg";
+export type ColorToken = "color.bg.deep" | "color.bg.panel" | "color.bg.surface" | "color.bg.elevated" | "color.bg.inset" | "color.state.hover" | "color.state.active" | "color.border.subtle" | "color.border.default" | "color.border.strong" | "color.border.accent" | "color.text.primary" | "color.text.secondary" | "color.text.muted" | "color.text.subtle" | "color.overlay" | "color.accent.default" | "color.accent.bright" | "color.accent.hover" | "color.accent.press" | "color.accent.ink" | "color.accent.text" | "color.accent.subtle" | "color.status.neutral" | "color.status.info" | "color.status.queued" | "color.status.success" | "color.status.warning" | "color.status.danger" | "color.status.danger-ink" | "color.status.neutral-bg" | "color.status.info-bg" | "color.status.queued-bg" | "color.status.success-bg" | "color.status.warning-bg" | "color.status.danger-bg";
 export type TokenName =
   | "color.accent.bright"
   | "color.accent.default"
   | "color.accent.hover"
   | "color.accent.ink"
+  | "color.accent.press"
   | "color.accent.subtle"
   | "color.accent.text"
   | "color.bg.deep"
@@ -187,12 +225,16 @@ export type TokenName =
   | "color.bg.inset"
   | "color.bg.panel"
   | "color.bg.surface"
+  | "color.border.accent"
   | "color.border.default"
   | "color.border.strong"
   | "color.border.subtle"
   | "color.overlay"
+  | "color.state.active"
+  | "color.state.hover"
   | "color.status.danger"
   | "color.status.danger-bg"
+  | "color.status.danger-ink"
   | "color.status.info"
   | "color.status.info-bg"
   | "color.status.neutral"
@@ -207,12 +249,26 @@ export type TokenName =
   | "color.text.primary"
   | "color.text.secondary"
   | "color.text.subtle"
+  | "control.check"
+  | "control.field-min"
+  | "control.lg"
+  | "control.md"
+  | "control.sm"
+  | "control.switch"
+  | "control.switch-height"
+  | "control.thumb"
   | "ease.out"
   | "font.mono"
   | "font.sans"
   | "leading.loose"
   | "leading.normal"
   | "leading.tight"
+  | "measure.dialog"
+  | "measure.menu"
+  | "measure.popover"
+  | "measure.table"
+  | "measure.toast"
+  | "measure.tooltip"
   | "motion.base"
   | "motion.fast"
   | "radius.lg"

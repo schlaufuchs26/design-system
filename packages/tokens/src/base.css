@@ -91,7 +91,7 @@ kbd {
   border: 1px solid var(--fox-color-border-default);
   border-bottom-width: 2px;
   border-radius: var(--fox-radius-sm);
-  padding: 1px 5px;
+  padding: 1px var(--fox-space-1);
   color: var(--fox-color-text-primary);
   font-size: var(--fox-text-xs);
 }
@@ -116,11 +116,13 @@ textarea {
   color: var(--fox-color-text-primary);
 }
 
-/* One ring for the whole system: keyboard focus is always the amber ring. */
+/* One ring for the whole system: keyboard focus is always the amber ring,
+   2px, 2px outside the element's own edge. It never changes the element's
+   radius; components that sit on a border (tabs, menu items) pull it inside
+   with outline-offset: -2px instead of drawing a second treatment. */
 :focus-visible {
   outline: 2px solid var(--fox-color-accent-default);
   outline-offset: 2px;
-  border-radius: var(--fox-radius-sm);
 }
 
 * {
@@ -165,7 +167,7 @@ textarea {
   color: var(--fox-color-text-muted);
   font-size: var(--fox-text-xs);
   font-weight: var(--fox-weight-semibold);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 

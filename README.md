@@ -96,7 +96,158 @@ The React package exposes 18 components: Button, IconButton, TextField,
 TextArea, Select, Checkbox, Switch, Radio group, Dialog, Tooltip, Popover,
 Menu, Tabs, Table, Toast, Badge, Card, and Stack/Row/Grid. Props, variants,
 accessibility notes and keyboard contracts are on the published Pages site,
-one page per component.
+one page per component. The [gallery](https://schlaufuchs26.github.io/design-system/gallery.html)
+shows every component in every variant, size and state, dark and light.
+
+## The rules
+
+The set was designed on 2026-10-18 in one pass, so the eighteen components
+look like one system rather than eighteen decisions. Each rule below is
+checkable: `packages/tokens/tests/rules.test.ts` fails when the CSS breaks
+one, and the gallery is the page a change is judged against.
+
+### Spacing
+
+One 4-based scale, no ad-hoc value: `space.1` 4, `2` 8, `3` 12, `4` 16,
+`5` 20, `6` 24, `8` 32, `10` 40, `12` 48, `16` 64. Component padding is one
+of those steps, and a test rejects any pixel literal above 4px in the
+component CSS (1-4px stay legal for borders and hairlines).
+
+| Where | Padding | Gap |
+|-------|---------|-----|
+| Control inline (sm / md / lg) | 8 / 12 / 16 | 8 |
+| Card, dialog, popover, toast | 16 | 8 |
+| Card and dialog header/footer | 12 vertical, 16 horizontal | 8 |
+| Menu and select popup | 4 around the list, 8 inside an item | 8 |
+| Badge | 8 inline | 4 |
+| Table cell | 8 vertical, 12 horizontal | — |
+
+Adapted from the [Material 3 spacing
+overview](https://m3.material.io/styles/spacing/overview) (4dp/8dp grid) and
+the [Primer spacing
+scale](https://primer.style/foundations/primitives/spacing) (4px base,
+4/8/12/16/24/32).
+
+### Type
+
+Six sizes and four weights; every size on the gallery is one of them.
+
+| Token | Size | Where |
+|-------|------|-------|
+| `text.2xl` | 32px | page title (h1) |
+| `text.xl` | 24px | section title (h2), docs page title |
+| `text.lg` | 18px | dialog title, h3 |
+| `text.base` | 15px | body, lg button |
+| `text.sm` | 13px | control and table text, card title, labels |
+| `text.xs` | 11px | badge, hint, eyebrow, table header, tooltip |
+
+Weights: 400 body, 500 control labels and buttons, 600 titles and section
+headings, 700 reserved for emphasis inside prose. Leadings: `tight` 1.2 for
+headings and single-line controls, `normal` 1.55 for body, `loose` 1.7 for
+long text. Uppercase micro labels (eyebrow, menu label, table header) share
+one tracking, 0.06em.
+
+Adapted from the [Material 3 type
+scale](https://m3.material.io/styles/typography/type-scale-tokens) (11/14/16/22
+label, body and title steps) and the [Radix Themes type
+scale](https://www.radix-ui.com/themes/docs/theme/typography).
+
+### Size steps
+
+| Step | Height | Font |
+|------|--------|------|
+| `sm` | 28px (`control.sm`) | 11px |
+| `md` | 36px (`control.md`) | 13px |
+| `lg` | 44px (`control.lg`) | 15px |
+| icon | 36×36, the md square | 13px |
+
+Buttons, inputs, native selects, the Base UI select trigger, tabs and menu
+items all take one of these heights, so a form row lines up. Steps are 8px
+apart, and `[data-density="compact"]` lowers all three by 4px. Checkbox and
+radio are 18px (`control.check`), the switch is a 36×20 track
+(`control.switch`, `control.switch-height`) with a 14px thumb.
+
+Adapted from [Radix Themes sizes
+1-3](https://www.radix-ui.com/themes/docs/theme/spacing) (24/32/40) and
+[Primer control
+heights](https://primer.style/foundations/primitives/size) (28/32/40); the
+8px step is ours so the heights sit on the spacing scale.
+
+### Radii
+
+| Token | Value | Where |
+|-------|-------|-------|
+| `radius.sm` | 4px | menu item, select item, checkbox, kbd, tooltip |
+| `radius.md` | 6px | every control: button, input, select, table wrapper |
+| `radius.lg` | 10px | surfaces: card, panel, popover, menu, select popup, toast |
+| `radius.xl` | 14px | dialog only |
+| `radius.pill` | 999px | badge, dot, switch, scrollbar |
+
+The tooltip is the one deliberate exception: it keeps 4px because a single
+line of text should read as a hint, not as a bubble. Adapted from [Material 3
+shape tokens](https://m3.material.io/styles/shape/shape-scale-tokens)
+(4/8/12/16) and [Primer
+borders](https://primer.style/foundations/primitives/border) (6px controls,
+12px overlays).
+
+### Borders and elevation
+
+| Token | Use |
+|-------|-----|
+| `color.border.subtle` | a divider inside a surface: card header and footer, table cells and header, tabs list, menu separator |
+| `color.border.default` | an outer edge or a control: dialog, popover, menu, select, toast, input, outline button |
+| `color.border.strong` | an unchecked control that must read as editable: checkbox, radio, switch track |
+| `color.border.accent` | an accent-tinted edge, e.g. a card marked active |
+
+Surfaces are flat. `shadow.sm` lifts a raised card, `shadow.md` floats a
+popover, menu, select popup or toast, `shadow.lg` is the dialog. Nothing else
+casts a shadow. Adapted from the [Material 3 elevation
+levels](https://m3.material.io/styles/elevation/tokens) and the [Primer shadow
+scale](https://primer.style/foundations/primitives/color#shadows).
+
+### Focus
+
+One ring for the whole system: `outline: 2px solid var(--fox-color-accent-default)`
+with `outline-offset: 2px`, declared once in `base.css`. It never changes the
+element's radius. Components that sit on a border (tabs, menu and select
+items) pull the same ring inside with `outline-offset: -2px`; they never draw
+a second treatment, and no rule sets `outline: none` on a focusable element.
+The popup container of a menu, select or popover takes focus without a ring,
+because the highlighted item inside it carries the ring.
+
+Adapted from the [Fluent 2 focus
+rectangle](https://fluent2.microsoft.design/components/web/react/core/focus)
+(2px stroke with a visible gap) and [Radix Themes
+focus](https://www.radix-ui.com/themes/docs/theme/visual-style) (one accent
+ring, offset outside).
+
+### Motion
+
+Two durations and one easing: `motion.fast` 120ms for colour, background and
+border; `motion.base` 180ms for movement (the switch thumb). Easing is
+`ease.out` for everything. Nothing else animates, and
+`prefers-reduced-motion` collapses both to 0.01ms. Adapted from the [Material
+3 motion
+durations](https://m3.material.io/styles/motion/easing-and-duration/tokens-specs)
+(short 50-200ms) and [Radix Themes
+animation](https://www.radix-ui.com/themes/docs/theme/animation) (150ms).
+
+### States
+
+Every interactive component has the same five states: rest, hover, active
+(pressed), focus-visible and disabled. Hover and press are **state layers**:
+`color.state.hover` (8% white in the dark theme, 6% ink in the light one) and
+`color.state.active` (16% / 12%) paint over whatever surface the control sits
+on, so the same rule reads on a panel, a card and a floating menu. Filled
+variants instead darken on press (`accent.press`) or brighten then dim
+(`filter` on danger). Disabled is `opacity: 0.45` and `cursor: not-allowed`
+everywhere. Invalid is `aria-invalid="true"` plus the danger border and the
+danger hint, on inputs, textareas and selects alike.
+
+Adapted from the [Material 3 state
+layers](https://m3.material.io/foundations/interaction/states/state-layers)
+(on-surface at 8% hover, 12% press) and [Primer's interaction
+states](https://primer.style/foundations/primitives/color#interaction-states).
 
 ## Primitive layer: Base UI
 

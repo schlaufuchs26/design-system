@@ -6,7 +6,8 @@
       "**",
       "!**/dist",
       "!docs/design-system.css",
-      "!docs/components"
+      "!docs/components",
+      "!docs/gallery.html"
     ]
   },
   "formatter": {
