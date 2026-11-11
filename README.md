@@ -295,6 +295,11 @@ bun run biome
 bun run checks    # all of the above
 ```
 
+`bun.lock` stays on `lockfileVersion` 1 on purpose: the Mac mini's bun is
+1.3.13, which cannot read version 2 and leaves a fresh worktree without
+`node_modules`. A newer bun keeps an existing v1 lockfile as v1; it writes
+version 2 only for a lockfile it creates from scratch.
+
 `packages/tokens/dist/` and `docs/components/` are committed: they are the
 artifacts consumers and the published site read, and committing them keeps a
 consumer's build offline. Tests fail when `dist/` drifts from a fresh
